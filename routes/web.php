@@ -7,6 +7,7 @@ use App\Http\Controllers\QrCodeController;
 use App\Http\Controllers\Admin\UsuarioController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\BitacoraController;
+use App\Http\Controllers\ReporteAlumnoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,6 +48,12 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
     // Admin - Bitacoras CRUD
     Route::resource('bitacoras', BitacoraController::class)->names('bitacoras');
+
+    // Admin - Reportes Alumnos CRUD
+    Route::resource('reportes', ReporteAlumnoController::class)->names('reportes');
+    Route::patch('reportes/{reporte}/firmar-prefecto', [ReporteAlumnoController::class, 'firmarPrefecto'])->name('reportes.firmar-prefecto');
+    Route::patch('reportes/{reporte}/firmar-trabajador-social', [ReporteAlumnoController::class, 'firmarTrabajadorSocial'])->name('reportes.firmar-trabajador-social');
+    Route::get('reportes/{reporte}/pdf', [ReporteAlumnoController::class, 'pdf'])->name('reportes.pdf');
 
     // 404 fallback
     Route::fallback(function() {

@@ -24,6 +24,7 @@ class AdditionalProfileFields extends Component
             'curp' => $user->curp,
             'sexo' => $user->sexo,
             'puesto' => $user->puesto,
+            'theme' => $user->theme,
         ];
     }
 

@@ -130,16 +130,16 @@
                                     stroke-width="4"></circle>
                                 <path class="opacity-75" fill="currentColor"
                                     d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
-                                </path>
-                            </svg>
+                                                        </path>
+                                                    </svg>
                             <span class="ml-2 text-sm text-gray-600 dark:text-gray-400">Buscando...</span>
-                        </div>
+                                            </div>
                     </div>
 
                     <!-- Tabla de estudiantes -->
                     <div id="students-table">
                         @include('admin.students.partials.table', ['students' => $students])
-                    </div>
+                        </div>
                 </div>
             </div>
         </div>

@@ -33,13 +33,13 @@
 
             <!-- Sexo -->
             <div>
-                <x-label for="sexo">{{ __('Gender') }}</x-label>
+                <x-label for="sexo">{{ __('Sexo') }}</x-label>
                 <select id="sexo" name="sexo"
                     class="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-violet-500 dark:bg-gray-800 dark:text-gray-100">
-                    <option value="">{{ __('Select gender') }}</option>
-                    <option value="masculino" {{ old('sexo') == 'masculino' ? 'selected' : '' }}>{{ __('Male') }}
+                    <option value="">{{ __('Seleccionar sexo') }}</option>
+                    <option value="masculino" {{ old('sexo') == 'masculino' ? 'selected' : '' }}>{{ __('Masculino') }}
                     </option>
-                    <option value="femenino" {{ old('sexo') == 'femenino' ? 'selected' : '' }}>{{ __('Female') }}
+                    <option value="femenino" {{ old('sexo') == 'femenino' ? 'selected' : '' }}>{{ __('Femenino') }}
                     </option>
                 </select>
             </div>
@@ -50,31 +50,39 @@
                 <select id="puesto" name="puesto"
                     class="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-violet-500 dark:bg-gray-800 dark:text-gray-100">
                     <option value="">{{ __('Select position') }}</option>
-                    <option value="Director" {{ old('puesto') == 'Director' ? 'selected' : '' }}>{{ __('Director') }}
+                    <option value="ADMINISTRATIVO" {{ old('puesto') == 'ADMINISTRATIVO' ? 'selected' : '' }}>
+                        {{ __('Administrativo') }}</option>
+                    <option value="ATP" {{ old('puesto') == 'ATP' ? 'selected' : '' }}>{{ __('ATP') }}</option>
+                    <option value="COORDINADOR ACADEMICO"
+                        {{ old('puesto') == 'COORDINADOR ACADEMICO' ? 'selected' : '' }}>
+                        {{ __('Coordinador Académico') }}</option>
+                    <option value="DIRECTOR" {{ old('puesto') == 'DIRECTOR' ? 'selected' : '' }}>{{ __('Director') }}
                     </option>
-                    <option value="Subdirector" {{ old('puesto') == 'Subdirector' ? 'selected' : '' }}>
+                    <option value="DOCENTE" {{ old('puesto') == 'DOCENTE' ? 'selected' : '' }}>{{ __('Docente') }}
+                    </option>
+                    <option value="PREFECTURA" {{ old('puesto') == 'PREFECTURA' ? 'selected' : '' }}>
+                        {{ __('Prefectura') }}</option>
+                    <option value="PSICOLOGO" {{ old('puesto') == 'PSICOLOGO' ? 'selected' : '' }}>
+                        {{ __('Psicólogo') }}</option>
+                    <option value="SUBDIRECTOR" {{ old('puesto') == 'SUBDIRECTOR' ? 'selected' : '' }}>
                         {{ __('Subdirector') }}</option>
-                    <option value="Coordinador" {{ old('puesto') == 'Coordinador' ? 'selected' : '' }}>
-                        {{ __('Coordinador') }}</option>
-                    <option value="Jefe de departamento"
-                        {{ old('puesto') == 'Jefe de departamento' ? 'selected' : '' }}>
-                        {{ __('Jefe de departamento') }}</option>
-                    <option value="Analista Especializado"
-                        {{ old('puesto') == 'Analista Especializado' ? 'selected' : '' }}>
-                        {{ __('Analista Especializado') }}</option>
-                    <option value="Analista" {{ old('puesto') == 'Analista' ? 'selected' : '' }}>{{ __('Analista') }}
+                    <option value="TRABAJO SOCIAL" {{ old('puesto') == 'TRABAJO SOCIAL' ? 'selected' : '' }}>
+                        {{ __('Trabajo Social') }}</option>
+                    <option value="USAER" {{ old('puesto') == 'USAER' ? 'selected' : '' }}>{{ __('USAER') }}
+                    </option>
+                    <option value="VELADOR" {{ old('puesto') == 'VELADOR' ? 'selected' : '' }}>{{ __('Velador') }}
                     </option>
                 </select>
             </div>
 
             <!-- Tema preferido -->
             <div>
-                <x-label for="theme">{{ __('Preferred Theme') }}</x-label>
+                <x-label for="theme">{{ __('Tema Preferido') }}</x-label>
                 <select id="theme" name="theme"
                     class="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-violet-500 dark:bg-gray-800 dark:text-gray-100">
                     <option value="light" {{ old('theme', 'light') == 'light' ? 'selected' : '' }}>
-                        {{ __('Light') }}</option>
-                    <option value="dark" {{ old('theme') == 'dark' ? 'selected' : '' }}>{{ __('Dark') }}</option>
+                        {{ __('Claro') }}</option>
+                    <option value="dark" {{ old('theme') == 'dark' ? 'selected' : '' }}>{{ __('Oscuro') }}</option>
                 </select>
             </div>
 

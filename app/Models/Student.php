@@ -54,6 +54,14 @@ class Student extends Model
     }
 
     /**
+     * Get the reportes for the student.
+     */
+    public function reportes(): HasMany
+    {
+        return $this->hasMany(ReporteAlumno::class);
+    }
+
+    /**
      * Get the student's full name.
      *
      * @return string

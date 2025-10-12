@@ -34,6 +34,7 @@ class User extends Authenticatable
         'nivel',
         'puesto',
         'estatus',
+        'profile_photo_path',
     ];
 
     /**
@@ -80,5 +81,53 @@ class User extends Authenticatable
         
         // Fallback a avatar con iniciales usando UI Avatars
         return "https://ui-avatars.com/api/?name=" . urlencode($this->name) . "&color=7F9CF5&background=EBF4FF";
+    }
+
+    /**
+     * Get the reportes where this user is the profesor.
+     */
+    public function reportesComoProfesor()
+    {
+        return $this->hasMany(ReporteAlumno::class, 'profesor_id');
+    }
+
+    /**
+     * Get the reportes where this user is the prefecto.
+     */
+    public function reportesComoPrefecto()
+    {
+        return $this->hasMany(ReporteAlumno::class, 'prefecto_id');
+    }
+
+    /**
+     * Get the reportes where this user is the trabajador social.
+     */
+    public function reportesComoTrabajadorSocial()
+    {
+        return $this->hasMany(ReporteAlumno::class, 'trabajo_social_id');
+    }
+
+    /**
+     * Check if user is a profesor.
+     */
+    public function esProfesor(): bool
+    {
+        return $this->puesto === 'DOCENTE';
+    }
+
+    /**
+     * Check if user is a prefecto.
+     */
+    public function esPrefecto(): bool
+    {
+        return $this->puesto === 'PREFECTURA';
+    }
+
+    /**
+     * Check if user is a trabajador social.
+     */
+    public function esTrabajadorSocial(): bool
+    {
+        return $this->puesto === 'TRABAJO SOCIAL';
     }
 }

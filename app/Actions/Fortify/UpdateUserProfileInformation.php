@@ -24,7 +24,8 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
             'rfc' => ['nullable', 'string', 'max:14', 'min:10'],
             'curp' => ['nullable', 'string', 'max:19', 'min:10'],
             'sexo' => ['nullable', 'in:femenino,masculino'],
-            'puesto' => ['nullable', 'string', 'in:Director,Subdirector,Coordinador,Jefe de departamento,Analista Especializado,Analista'],
+            'puesto' => ['nullable', 'in:ADMINISTRATIVO,ATP,COORDINADOR ACADEMICO,DIRECTOR,DOCENTE,PREFECTURA,PSICOLOGO,SUBDIRECTOR,TRABAJO SOCIAL,USAER,VELADOR'],
+            'theme' => ['nullable', 'in:dark,light'],
         ])->validateWithBag('updateProfileInformation');
 
         if (isset($input['photo'])) {
@@ -42,6 +43,7 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
                 'curp' => $input['curp'] ?? null,
                 'sexo' => $input['sexo'] ?? null,
                 'puesto' => $input['puesto'] ?? null,
+                'theme' => $input['theme'] ?? null,
             ])->save();
         }
     }
@@ -61,6 +63,7 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
             'curp' => $input['curp'] ?? null,
             'sexo' => $input['sexo'] ?? null,
             'puesto' => $input['puesto'] ?? null,
+            'theme' => $input['theme'] ?? null,
         ])->save();
 
         $user->sendEmailVerificationNotification();

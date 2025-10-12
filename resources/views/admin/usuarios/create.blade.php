@@ -151,22 +151,32 @@
                                 <select id="puesto" name="puesto"
                                     class="w-full px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-md focus:ring-violet-500 focus:border-violet-500 dark:bg-gray-700 dark:text-gray-100">
                                     <option value="">{{ __('Seleccionar puesto') }}</option>
-                                    <option value="Director" {{ old('puesto') == 'Director' ? 'selected' : '' }}>
+                                    <option value="ADMINISTRATIVO"
+                                        {{ old('puesto') == 'ADMINISTRATIVO' ? 'selected' : '' }}>
+                                        {{ __('Administrativo') }}</option>
+                                    <option value="ATP" {{ old('puesto') == 'ATP' ? 'selected' : '' }}>
+                                        {{ __('ATP') }}</option>
+                                    <option value="COORDINADOR ACADEMICO"
+                                        {{ old('puesto') == 'COORDINADOR ACADEMICO' ? 'selected' : '' }}>
+                                        {{ __('Coordinador Académico') }}</option>
+                                    <option value="DIRECTOR" {{ old('puesto') == 'DIRECTOR' ? 'selected' : '' }}>
                                         {{ __('Director') }}</option>
-                                    <option value="Subdirector"
-                                        {{ old('puesto') == 'Subdirector' ? 'selected' : '' }}>{{ __('Subdirector') }}
-                                    </option>
-                                    <option value="Coordinador"
-                                        {{ old('puesto') == 'Coordinador' ? 'selected' : '' }}>{{ __('Coordinador') }}
-                                    </option>
-                                    <option value="Jefe de departamento"
-                                        {{ old('puesto') == 'Jefe de departamento' ? 'selected' : '' }}>
-                                        {{ __('Jefe de departamento') }}</option>
-                                    <option value="Analista Especializado"
-                                        {{ old('puesto') == 'Analista Especializado' ? 'selected' : '' }}>
-                                        {{ __('Analista Especializado') }}</option>
-                                    <option value="Analista" {{ old('puesto') == 'Analista' ? 'selected' : '' }}>
-                                        {{ __('Analista') }}</option>
+                                    <option value="DOCENTE" {{ old('puesto') == 'DOCENTE' ? 'selected' : '' }}>
+                                        {{ __('Docente') }}</option>
+                                    <option value="PREFECTURA" {{ old('puesto') == 'PREFECTURA' ? 'selected' : '' }}>
+                                        {{ __('Prefectura') }}</option>
+                                    <option value="PSICOLOGO" {{ old('puesto') == 'PSICOLOGO' ? 'selected' : '' }}>
+                                        {{ __('Psicólogo') }}</option>
+                                    <option value="SUBDIRECTOR"
+                                        {{ old('puesto') == 'SUBDIRECTOR' ? 'selected' : '' }}>
+                                        {{ __('Subdirector') }}</option>
+                                    <option value="TRABAJO SOCIAL"
+                                        {{ old('puesto') == 'TRABAJO SOCIAL' ? 'selected' : '' }}>
+                                        {{ __('Trabajo Social') }}</option>
+                                    <option value="USAER" {{ old('puesto') == 'USAER' ? 'selected' : '' }}>
+                                        {{ __('USAER') }}</option>
+                                    <option value="VELADOR" {{ old('puesto') == 'VELADOR' ? 'selected' : '' }}>
+                                        {{ __('Velador') }}</option>
                                 </select>
                                 @error('puesto')
                                     <p class="mt-1 text-xs text-red-600 dark:text-red-400">{{ $message }}</p>

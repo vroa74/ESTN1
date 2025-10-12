@@ -96,6 +96,24 @@
                             </div>
                         </a>
                     </li>
+
+                    <!-- Reportes -->
+                    <li
+                        class="pl-4 pr-3 py-2 rounded-lg mb-0.5 last:mb-0 bg-linear-to-r @if (Route::is('reportes*')) {{ 'from-violet-500/[0.12] dark:from-violet-500/[0.24] to-violet-500/[0.04]' }} @endif">
+                        <a class="block text-gray-800 dark:text-gray-100 truncate transition @if (!Route::is('reportes*')) {{ 'hover:text-gray-900 dark:hover:text-white' }} @endif"
+                            href="{{ route('reportes.index') }}">
+                            <div class="flex items-center">
+                                <svg class="shrink-0 fill-current @if (Route::is('reportes*')) {{ 'text-violet-500' }}@else{{ 'text-gray-400 dark:text-gray-500' }} @endif"
+                                    xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+                                    viewBox="0 0 16 16">
+                                    <path
+                                        d="M3 0a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V1a1 1 0 0 0-1-1H3zm1 1h8v14H4V1zm2 2h4v1H6V3zm0 2h4v1H6V5zm0 2h4v1H6V7zm0 2h4v1H6V9zm0 2h4v1H6v-1zm0 2h4v1H6v-1z" />
+                                </svg>
+                                <span
+                                    class="text-sm font-medium ml-4 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">{{ __('Reportes') }}</span>
+                            </div>
+                        </a>
+                    </li>
                     <!-- QR -->
                     <li
                         class="pl-4 pr-3 py-2 rounded-lg mb-0.5 last:mb-0 bg-linear-to-r @if (Route::is('qr')) {{ 'from-violet-500/[0.12] dark:from-violet-500/[0.24] to-violet-500/[0.04]' }} @endif">
