@@ -79,6 +79,23 @@
                             </div>
                         </a>
                     </li>
+                    <!-- Estudiantes -->
+                    <li
+                        class="pl-4 pr-3 py-2 rounded-lg mb-0.5 last:mb-0 bg-linear-to-r @if (Route::is('estudiante*')) {{ 'from-violet-500/[0.12] dark:from-violet-500/[0.24] to-violet-500/[0.04]' }} @endif">
+                        <a class="block text-gray-800 dark:text-gray-100 truncate transition @if (!Route::is('estudiante*')) {{ 'hover:text-gray-900 dark:hover:text-white' }} @endif"
+                            href="{{ route('estudiante.index') }}">
+                            <div class="flex items-center">
+                                <svg class="shrink-0 fill-current @if (Route::is('estudiante*')) {{ 'text-violet-500' }}@else{{ 'text-gray-400 dark:text-gray-500' }} @endif"
+                                    xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+                                    viewBox="0 0 16 16">
+                                    <path
+                                        d="M8 0a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7Zm0 5.5a2 2 0 1 1 0-4 2 2 0 0 1 0 4ZM2 15.5c0-2.761 2.239-5 5-5h2c2.761 0 5 2.239 5 5v.5H2v-.5Z" />
+                                </svg>
+                                <span
+                                    class="text-sm font-medium ml-4 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">{{ __('Estudiantes') }}</span>
+                            </div>
+                        </a>
+                    </li>
                     <!-- QR -->
                     <li
                         class="pl-4 pr-3 py-2 rounded-lg mb-0.5 last:mb-0 bg-linear-to-r @if (Route::is('qr')) {{ 'from-violet-500/[0.12] dark:from-violet-500/[0.24] to-violet-500/[0.04]' }} @endif">

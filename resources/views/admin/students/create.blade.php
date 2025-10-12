@@ -9,7 +9,7 @@
         <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6">
-                    <form action="{{ route('students.store') }}" method="POST">
+                    <form action="{{ route('estudiante.store') }}" method="POST">
                         @csrf
 
                         <!-- Información Básica -->
@@ -152,36 +152,26 @@
                             <h3 class="text-lg font-medium text-gray-900 dark:text-gray-100 mb-4">
                                 Estado y Observaciones
                             </h3>
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <!-- Estatus -->
-                                <div>
-                                    <x-label for="estatus" value="{{ __('Estatus') }}" />
-                                    <select id="estatus" name="estatus"
-                                        class="mt-1 block w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">
-                                        <option value="activo"
-                                            {{ old('estatus', 'activo') == 'activo' ? 'selected' : '' }}>Activo
-                                        </option>
-                                        <option value="inactivo" {{ old('estatus') == 'inactivo' ? 'selected' : '' }}>
-                                            Inactivo</option>
-                                        <option value="egresado" {{ old('estatus') == 'egresado' ? 'selected' : '' }}>
-                                            Egresado</option>
-                                        <option value="baja" {{ old('estatus') == 'baja' ? 'selected' : '' }}>Baja
-                                        </option>
-                                    </select>
-                                    <x-input-error for="estatus" class="mt-2" />
-                                </div>
-
-                                <!-- Status (Boolean) -->
-                                <div class="flex items-center mt-6">
-                                    <input type="checkbox" id="status" name="status" value="1"
-                                        {{ old('status', true) ? 'checked' : '' }}
-                                        class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500 dark:bg-gray-900 dark:border-gray-700">
-                                    <x-label for="status" value="{{ __('Estado Activo') }}" class="ml-2" />
-                                </div>
+                            <!-- Estatus -->
+                            <div class="mb-4">
+                                <x-label for="estatus" value="{{ __('Estatus') }}" />
+                                <select id="estatus" name="estatus"
+                                    class="mt-1 block w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">
+                                    <option value="activo"
+                                        {{ old('estatus', 'activo') == 'activo' ? 'selected' : '' }}>Activo
+                                    </option>
+                                    <option value="inactivo" {{ old('estatus') == 'inactivo' ? 'selected' : '' }}>
+                                        Inactivo</option>
+                                    <option value="egresado" {{ old('estatus') == 'egresado' ? 'selected' : '' }}>
+                                        Egresado</option>
+                                    <option value="baja" {{ old('estatus') == 'baja' ? 'selected' : '' }}>Baja
+                                    </option>
+                                </select>
+                                <x-input-error for="estatus" class="mt-2" />
                             </div>
 
                             <!-- Observaciones -->
-                            <div class="mt-4">
+                            <div>
                                 <x-label for="observaciones" value="{{ __('Observaciones') }}" />
                                 <textarea id="observaciones" name="observaciones" rows="3"
                                     class="mt-1 block w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">{{ old('observaciones') }}</textarea>
@@ -191,7 +181,7 @@
 
                         <!-- Botones -->
                         <div class="flex items-center justify-end space-x-2 mt-6">
-                            <a href="{{ route('students.index') }}"
+                            <a href="{{ route('estudiante.index') }}"
                                 class="inline-flex items-center px-4 py-2 bg-gray-300 dark:bg-gray-700 border border-transparent rounded-md font-semibold text-xs text-gray-700 dark:text-gray-300 uppercase tracking-widest hover:bg-gray-400 dark:hover:bg-gray-600 transition ease-in-out duration-150">
                                 {{ __('Cancelar') }}
                             </a>

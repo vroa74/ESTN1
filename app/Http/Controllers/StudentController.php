@@ -11,12 +11,49 @@ class StudentController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $students = Student::orderBy('grado', 'asc')
+        $query = Student::query();
+
+        // Filtro por matrícula
+        if ($request->filled('matricula')) {
+            $query->where('matricula', 'like', '%' . $request->matricula . '%');
+        }
+
+        // Filtro por nombre completo (busca en nombres, apa, ama)
+        if ($request->filled('nombre')) {
+            $query->where(function($q) use ($request) {
+                $q->where('nombres', 'like', '%' . $request->nombre . '%')
+                  ->orWhere('apa', 'like', '%' . $request->nombre . '%')
+                  ->orWhere('ama', 'like', '%' . $request->nombre . '%');
+            });
+        }
+
+        // Filtro por grado
+        if ($request->filled('grado')) {
+            $query->where('grado', $request->grado);
+        }
+
+        // Filtro por grupo
+        if ($request->filled('grupo')) {
+            $query->where('grupo', $request->grupo);
+        }
+
+        // Filtro por email
+        if ($request->filled('email')) {
+            $query->where('email', 'like', '%' . $request->email . '%');
+        }
+
+        $students = $query->orderBy('grado', 'asc')
             ->orderBy('grupo', 'asc')
             ->orderBy('apa', 'asc')
-            ->paginate(15);
+            ->paginate(15)
+            ->withQueryString();
+
+        // Si es una petición AJAX, retornar solo la tabla
+        if ($request->ajax()) {
+            return view('admin.students.partials.table', compact('students'));
+        }
 
         return view('admin.students.index', compact('students'));
     }
@@ -45,48 +82,44 @@ class StudentController extends Controller
             'fnac' => 'nullable|date',
             'curp' => 'nullable|string|size:18|unique:students,curp',
             'sexo' => 'required|in:F,M',
-            'sex' => 'nullable|boolean',
             'email' => 'nullable|email|max:100|unique:students,email',
             'telefono' => 'nullable|string|max:15',
             'estatus' => 'nullable|in:activo,inactivo,egresado,baja',
             'observaciones' => 'nullable|string',
-            'status' => 'nullable|boolean',
         ]);
 
         // Establecer valores por defecto si no se proporcionan
         $validated['estatus'] = $validated['estatus'] ?? 'activo';
-        $validated['status'] = $validated['status'] ?? true;
-        $validated['sex'] = $validated['sex'] ?? true;
 
         Student::create($validated);
 
-        return redirect()->route('students.index')
+        return redirect()->route('estudiante.index')
             ->with('success', 'Estudiante creado exitosamente.');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Student $student)
+    public function show(Student $estudiante)
     {
-        return view('admin.students.show', compact('student'));
+        return view('admin.students.show', compact('estudiante'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Student $student)
+    public function edit(Student $estudiante)
     {
-        return view('admin.students.edit', compact('student'));
+        return view('admin.students.edit', compact('estudiante'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Student $student)
+    public function update(Request $request, Student $estudiante)
     {
         $validated = $request->validate([
-            'matricula' => 'nullable|string|max:20|unique:students,matricula,' . $student->id,
+            'matricula' => 'nullable|string|max:20|unique:students,matricula,' . $estudiante->id,
             'grado' => 'nullable|integer|min:1|max:9',
             'grupo' => 'required|in:A,B,C,D,E,F,G,H,I,J,K,L',
             'Fnom' => 'nullable|string|max:255',
@@ -94,33 +127,31 @@ class StudentController extends Controller
             'apa' => 'nullable|string|max:255',
             'ama' => 'nullable|string|max:255',
             'fnac' => 'nullable|date',
-            'curp' => 'nullable|string|size:18|unique:students,curp,' . $student->id,
+            'curp' => 'nullable|string|size:18|unique:students,curp,' . $estudiante->id,
             'sexo' => 'required|in:F,M',
-            'sex' => 'nullable|boolean',
-            'email' => 'nullable|email|max:100|unique:students,email,' . $student->id,
+            'email' => 'nullable|email|max:100|unique:students,email,' . $estudiante->id,
             'telefono' => 'nullable|string|max:15',
             'estatus' => 'nullable|in:activo,inactivo,egresado,baja',
             'observaciones' => 'nullable|string',
-            'status' => 'nullable|boolean',
         ]);
 
-        $student->update($validated);
+        $estudiante->update($validated);
 
-        return redirect()->route('students.index')
+        return redirect()->route('estudiante.index')
             ->with('success', 'Estudiante actualizado exitosamente.');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Student $student)
+    public function destroy(Student $estudiante)
     {
         try {
-            $student->delete();
-            return redirect()->route('students.index')
+            $estudiante->delete();
+            return redirect()->route('estudiante.index')
                 ->with('success', 'Estudiante eliminado exitosamente.');
         } catch (\Exception $e) {
-            return redirect()->route('students.index')
+            return redirect()->route('estudiante.index')
                 ->with('error', 'No se pudo eliminar el estudiante.');
         }
     }

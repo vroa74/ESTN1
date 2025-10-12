@@ -29,7 +29,7 @@
                         <h3 class="text-lg font-medium text-gray-900 dark:text-gray-100">
                             {{ __('Lista de Estudiantes') }}
                         </h3>
-                        <a href="{{ route('students.create') }}"
+                        <a href="{{ route('estudiante.create') }}"
                             class="inline-flex items-center px-3 py-2 text-xs font-medium text-white bg-violet-600 hover:bg-violet-700 rounded-md transition-colors">
                             <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -67,10 +67,6 @@
                                     <th
                                         class="px-3 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
                                         {{ __('Estatus') }}
-                                    </th>
-                                    <th
-                                        class="px-3 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
-                                        {{ __('Estado') }}
                                     </th>
                                     <th
                                         class="px-3 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
@@ -120,14 +116,8 @@
                                             </span>
                                         </td>
                                         <td class="px-3 py-2 whitespace-nowrap text-xs">
-                                            <span
-                                                class="px-2 py-1 rounded-full text-xs font-medium {{ $student->status ? 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400' : 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400' }}">
-                                                {{ $student->status ? 'Activo' : 'Inactivo' }}
-                                            </span>
-                                        </td>
-                                        <td class="px-3 py-2 whitespace-nowrap text-xs">
                                             <div class="flex space-x-1">
-                                                <a href="{{ route('students.show', $student) }}"
+                                                <a href="{{ route('estudiante.show', $student) }}"
                                                     class="text-blue-600 hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300"
                                                     title="Ver">
                                                     <svg class="w-4 h-4" fill="none" stroke="currentColor"
@@ -141,7 +131,7 @@
                                                         </path>
                                                     </svg>
                                                 </a>
-                                                <a href="{{ route('students.edit', $student) }}"
+                                                <a href="{{ route('estudiante.edit', $student) }}"
                                                     class="text-indigo-600 hover:text-indigo-900 dark:text-indigo-400 dark:hover:text-indigo-300"
                                                     title="Editar">
                                                     <svg class="w-4 h-4" fill="none" stroke="currentColor"
@@ -152,8 +142,8 @@
                                                         </path>
                                                     </svg>
                                                 </a>
-                                                <form action="{{ route('students.destroy', $student) }}" method="POST"
-                                                    class="inline-block"
+                                                <form action="{{ route('estudiante.destroy', $student) }}"
+                                                    method="POST" class="inline-block"
                                                     onsubmit="return confirm('¿Estás seguro de eliminar este estudiante?');">
                                                     @csrf
                                                     @method('DELETE')
@@ -174,7 +164,7 @@
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="8"
+                                        <td colspan="7"
                                             class="px-3 py-4 text-center text-sm text-gray-500 dark:text-gray-400">
                                             No hay estudiantes registrados.
                                         </td>

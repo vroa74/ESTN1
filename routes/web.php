@@ -42,7 +42,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::resource('usuarios', UsuarioController::class)->names('usuarios');
 
     // Admin - Students CRUD
-    Route::resource('students', StudentController::class)->names('students');
+    Route::resource('estudiante', StudentController::class)->names('estudiante');
 
     // Admin - Bitacoras CRUD
     Route::resource('bitacoras', BitacoraController::class)->names('bitacoras');

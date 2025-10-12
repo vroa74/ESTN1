@@ -13,14 +13,14 @@
                     <div class="flex justify-between items-start mb-6">
                         <div>
                             <h3 class="text-2xl font-bold text-gray-900 dark:text-gray-100">
-                                {{ $student->full_name }}
+                                {{ $estudiante->full_name }}
                             </h3>
                             <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">
-                                Matrícula: {{ $student->matricula ?? 'N/A' }}
+                                Matrícula: {{ $estudiante->matricula ?? 'N/A' }}
                             </p>
                         </div>
                         <div class="flex space-x-2">
-                            <a href="{{ route('students.edit', $student) }}"
+                            <a href="{{ route('estudiante.edit', $estudiante) }}"
                                 class="inline-flex items-center px-3 py-2 text-xs font-medium text-white bg-indigo-600 hover:bg-indigo-700 rounded-md transition-colors">
                                 <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -29,7 +29,7 @@
                                 </svg>
                                 Editar
                             </a>
-                            <a href="{{ route('students.index') }}"
+                            <a href="{{ route('estudiante.index') }}"
                                 class="inline-flex items-center px-3 py-2 text-xs font-medium text-gray-700 dark:text-gray-300 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 rounded-md transition-colors">
                                 <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -50,20 +50,22 @@
                             <div>
                                 <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Matrícula</p>
                                 <p class="mt-1 text-sm text-gray-900 dark:text-gray-100">
-                                    {{ $student->matricula ?? 'N/A' }}</p>
+                                    {{ $estudiante->matricula ?? 'N/A' }}</p>
                             </div>
                             <div>
                                 <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Grado</p>
-                                <p class="mt-1 text-sm text-gray-900 dark:text-gray-100">{{ $student->grado ?? 'N/A' }}
+                                <p class="mt-1 text-sm text-gray-900 dark:text-gray-100">
+                                    {{ $estudiante->grado ?? 'N/A' }}
                                 </p>
                             </div>
                             <div>
                                 <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Grupo</p>
-                                <p class="mt-1 text-sm text-gray-900 dark:text-gray-100">{{ $student->grupo }}</p>
+                                <p class="mt-1 text-sm text-gray-900 dark:text-gray-100">{{ $estudiante->grupo }}</p>
                             </div>
                             <div>
                                 <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Fnom</p>
-                                <p class="mt-1 text-sm text-gray-900 dark:text-gray-100">{{ $student->Fnom ?? 'N/A' }}
+                                <p class="mt-1 text-sm text-gray-900 dark:text-gray-100">
+                                    {{ $estudiante->Fnom ?? 'N/A' }}
                                 </p>
                             </div>
                         </div>
@@ -79,33 +81,36 @@
                             <div>
                                 <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Nombres</p>
                                 <p class="mt-1 text-sm text-gray-900 dark:text-gray-100">
-                                    {{ $student->nombres ?? 'N/A' }}</p>
+                                    {{ $estudiante->nombres ?? 'N/A' }}</p>
                             </div>
                             <div>
                                 <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Apellido Paterno</p>
-                                <p class="mt-1 text-sm text-gray-900 dark:text-gray-100">{{ $student->apa ?? 'N/A' }}
+                                <p class="mt-1 text-sm text-gray-900 dark:text-gray-100">
+                                    {{ $estudiante->apa ?? 'N/A' }}
                                 </p>
                             </div>
                             <div>
                                 <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Apellido Materno</p>
-                                <p class="mt-1 text-sm text-gray-900 dark:text-gray-100">{{ $student->ama ?? 'N/A' }}
+                                <p class="mt-1 text-sm text-gray-900 dark:text-gray-100">
+                                    {{ $estudiante->ama ?? 'N/A' }}
                                 </p>
                             </div>
                             <div>
                                 <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Fecha de Nacimiento</p>
                                 <p class="mt-1 text-sm text-gray-900 dark:text-gray-100">
-                                    {{ $student->fnac ? $student->fnac->format('d/m/Y') : 'N/A' }}
+                                    {{ $estudiante->fnac ? $estudiante->fnac->format('d/m/Y') : 'N/A' }}
                                 </p>
                             </div>
                             <div>
                                 <p class="text-sm font-medium text-gray-500 dark:text-gray-400">CURP</p>
-                                <p class="mt-1 text-sm text-gray-900 dark:text-gray-100">{{ $student->curp ?? 'N/A' }}
+                                <p class="mt-1 text-sm text-gray-900 dark:text-gray-100">
+                                    {{ $estudiante->curp ?? 'N/A' }}
                                 </p>
                             </div>
                             <div>
                                 <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Sexo</p>
                                 <p class="mt-1 text-sm text-gray-900 dark:text-gray-100">
-                                    {{ $student->sexo == 'F' ? 'Femenino' : 'Masculino' }}
+                                    {{ $estudiante->sexo == 'F' ? 'Femenino' : 'Masculino' }}
                                 </p>
                             </div>
                         </div>
@@ -120,13 +125,14 @@
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
                                 <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Email</p>
-                                <p class="mt-1 text-sm text-gray-900 dark:text-gray-100">{{ $student->email ?? 'N/A' }}
+                                <p class="mt-1 text-sm text-gray-900 dark:text-gray-100">
+                                    {{ $estudiante->email ?? 'N/A' }}
                                 </p>
                             </div>
                             <div>
                                 <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Teléfono</p>
                                 <p class="mt-1 text-sm text-gray-900 dark:text-gray-100">
-                                    {{ $student->telefono ?? 'N/A' }}</p>
+                                    {{ $estudiante->telefono ?? 'N/A' }}</p>
                             </div>
                         </div>
                     </div>
@@ -137,43 +143,31 @@
                             class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4 border-b border-gray-200 dark:border-gray-700 pb-2">
                             Estado y Observaciones
                         </h4>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div>
-                                <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Estatus</p>
-                                <div class="mt-1">
-                                    @php
-                                        $estatusColors = [
-                                            'activo' =>
-                                                'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400',
-                                            'inactivo' =>
-                                                'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-400',
-                                            'egresado' =>
-                                                'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400',
-                                            'baja' => 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400',
-                                        ];
-                                    @endphp
-                                    <span
-                                        class="inline-flex px-3 py-1 rounded-full text-xs font-medium {{ $estatusColors[$student->estatus] ?? $estatusColors['inactivo'] }}">
-                                        {{ ucfirst($student->estatus) }}
-                                    </span>
-                                </div>
-                            </div>
-                            <div>
-                                <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Estado</p>
-                                <div class="mt-1">
-                                    <span
-                                        class="inline-flex px-3 py-1 rounded-full text-xs font-medium {{ $student->status ? 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400' : 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400' }}">
-                                        {{ $student->status ? 'Activo' : 'Inactivo' }}
-                                    </span>
-                                </div>
+                        <div>
+                            <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Estatus</p>
+                            <div class="mt-1">
+                                @php
+                                    $estatusColors = [
+                                        'activo' =>
+                                            'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400',
+                                        'inactivo' => 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-400',
+                                        'egresado' =>
+                                            'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400',
+                                        'baja' => 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400',
+                                    ];
+                                @endphp
+                                <span
+                                    class="inline-flex px-3 py-1 rounded-full text-xs font-medium {{ $estatusColors[$estudiante->estatus] ?? $estatusColors['inactivo'] }}">
+                                    {{ ucfirst($estudiante->estatus) }}
+                                </span>
                             </div>
                         </div>
-                        @if ($student->observaciones)
+                        @if ($estudiante->observaciones)
                             <div class="mt-4">
                                 <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Observaciones</p>
                                 <p
                                     class="mt-1 text-sm text-gray-900 dark:text-gray-100 bg-gray-50 dark:bg-gray-900 p-3 rounded-md">
-                                    {{ $student->observaciones }}
+                                    {{ $estudiante->observaciones }}
                                 </p>
                             </div>
                         @endif
@@ -189,13 +183,13 @@
                             <div>
                                 <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Fecha de Creación</p>
                                 <p class="mt-1 text-sm text-gray-900 dark:text-gray-100">
-                                    {{ $student->created_at->format('d/m/Y H:i:s') }}
+                                    {{ $estudiante->created_at ? $estudiante->created_at->format('d/m/Y H:i:s') : 'N/A' }}
                                 </p>
                             </div>
                             <div>
                                 <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Última Actualización</p>
                                 <p class="mt-1 text-sm text-gray-900 dark:text-gray-100">
-                                    {{ $student->updated_at->format('d/m/Y H:i:s') }}
+                                    {{ $estudiante->updated_at ? $estudiante->updated_at->format('d/m/Y H:i:s') : 'N/A' }}
                                 </p>
                             </div>
                         </div>
@@ -203,7 +197,7 @@
 
                     <!-- Botón de eliminar -->
                     <div class="flex justify-end mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
-                        <form action="{{ route('students.destroy', $student) }}" method="POST"
+                        <form action="{{ route('estudiante.destroy', $estudiante) }}" method="POST"
                             onsubmit="return confirm('¿Estás seguro de eliminar este estudiante? Esta acción no se puede deshacer.');">
                             @csrf
                             @method('DELETE')

@@ -3,7 +3,7 @@ revisa la barra de menu y  las vistas y elimita todas las entradas del menu que 
 la barra de menu es posible convertirla en en horizonta que que esta en la parte superior,  no quiero que inventes se puede segun la documentacion.
 
 
-
+necesito que en el indes se pueda hacer filtro de  los campos Matrícula 	Nombre Completo 	Grado 	Grupo 	Email  pero los cambios se haran live
 
 
 

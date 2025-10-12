@@ -30,12 +30,10 @@ class Student extends Model
         'fnac',
         'curp',
         'sexo',
-        'sex',
         'email',
         'telefono',
         'estatus',
         'observaciones',
-        'status',
     ];
 
     /**
@@ -45,8 +43,6 @@ class Student extends Model
      */
     protected $casts = [
         'fnac' => 'date',
-        'sex' => 'boolean',
-        'status' => 'boolean',
     ];
 
     /**

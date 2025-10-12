@@ -23,12 +23,10 @@ return new class extends Migration
             $table->date('fnac')->nullable();
             $table->string('curp', 18)->unique()->nullable(); // CURP del estudiante
             $table->enum('sexo', ['F', 'M'])->default('F'); // Sexo
-            $table->boolean('sex')->default(1); // 1 = masculino (por convención)
             $table->string('email', 100)->unique()->nullable(); // Email del estudiante
             $table->string('telefono', 15)->nullable(); // Teléfono
             $table->enum('estatus', ['activo', 'inactivo', 'egresado', 'baja'])->default('activo'); // Estatus del estudiante
             $table->text('observaciones')->nullable(); // Observaciones adicionales
-            $table->boolean('status')->default(1); // 1 = activo, 0 = inactivo
             $table->timestamps();
         });
     }
