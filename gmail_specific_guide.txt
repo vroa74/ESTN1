@@ -1,0 +1,39 @@
+🔐 CONFIGURACIÓN ESPECÍFICA PARA waortiz1975@gmail.com
+
+📋 PASOS QUE DEBES HACER:
+
+1. IR A CONFIGURACIÓN DE GMAIL:
+   - Ve a: https://myaccount.google.com/security
+   - Inicia sesión con: waortiz1975@gmail.com
+
+2. ACTIVAR VERIFICACIÓN EN 2 PASOS:
+   - Busca "Verificación en 2 pasos" 
+   - Actívala si no está activada
+   - Es OBLIGATORIO para generar contraseñas de aplicación
+
+3. GENERAR CONTRASEÑA DE APLICACIÓN:
+   - Busca "Contraseñas de aplicaciones"
+   - Selecciona "Aplicación" → "Otro (nombre personalizado)"
+   - Escribe: "Laravel Admin System"
+   - Gmail te dará una contraseña de 16 caracteres
+   - EJEMPLO: "abcd efgh ijkl mnop"
+
+4. ACTUALIZAR EL .env:
+   - Reemplaza: MAIL_PASSWORD=@mp3ch3Vict0r
+   - Con: MAIL_PASSWORD=abcdefghijklmnop (sin espacios)
+
+5. CONFIGURACIÓN FINAL:
+MAIL_MAILER=smtp
+MAIL_HOST=smtp.gmail.com
+MAIL_PORT=587
+MAIL_USERNAME="waortiz1975@gmail.com"
+MAIL_PASSWORD="TU_CONTRASEÑA_DE_APLICACION_16_CARACTERES"
+MAIL_ENCRYPTION=tls
+MAIL_FROM_ADDRESS="waortiz1975@gmail.com"
+MAIL_FROM_NAME="${APP_NAME}"
+
+⚠️ IMPORTANTE:
+- NO uses tu contraseña normal de Gmail
+- USA SOLO la contraseña de aplicación
+- Sin espacios en la contraseña de aplicación
+- La verificación en 2 pasos es OBLIGATORIA

@@ -1,0 +1,24 @@
+# Configuración temporal para Gmail SMTP (más confiable)
+MAIL_MAILER=smtp
+MAIL_HOST=smtp.gmail.com
+MAIL_PORT=587
+MAIL_USERNAME="tu_email@gmail.com"
+MAIL_PASSWORD="tu_app_password"
+MAIL_ENCRYPTION=tls
+MAIL_FROM_ADDRESS="tu_email@gmail.com"
+MAIL_FROM_NAME="${APP_NAME}"
+
+# Para usar Gmail necesitas:
+# 1. Activar autenticación de 2 factores
+# 2. Generar una contraseña de aplicación
+# 3. Usar esa contraseña aquí
+
+# Configuración alternativa para Ionos (si funciona):
+MAIL_MAILER=smtp
+MAIL_HOST=smtp.ionos.mx
+MAIL_PORT=587
+MAIL_USERNAME="webmaster@melomelon.club"
+MAIL_PASSWORD="CampecheVic2004.#@"
+MAIL_ENCRYPTION=tls
+MAIL_FROM_ADDRESS="webmaster@melomelon.club"
+MAIL_FROM_NAME="${APP_NAME}"

@@ -1,0 +1,34 @@
+🔐 CONFIGURACIÓN GMAIL PARA ENVÍOS DE TERCEROS
+
+📋 PASOS EN GMAIL:
+
+1. ACTIVAR AUTENTICACIÓN DE 2 FACTORES:
+   - Ve a: https://myaccount.google.com/security
+   - Busca "Verificación en 2 pasos"
+   - Actívala si no está activada
+
+2. GENERAR CONTRASEÑA DE APLICACIÓN:
+   - En la misma página de seguridad
+   - Busca "Contraseñas de aplicaciones"
+   - Selecciona "Aplicación" y "Otro"
+   - Escribe: "Laravel Admin"
+   - Copia la contraseña de 16 caracteres
+
+3. CONFIGURAR LARAVEL:
+   - Usar tu email Gmail normal
+   - Usar la contraseña de aplicación (NO la normal)
+
+4. CONFIGURACIÓN FINAL:
+MAIL_MAILER=smtp
+MAIL_HOST=smtp.gmail.com
+MAIL_PORT=587
+MAIL_USERNAME="tu_email@gmail.com"
+MAIL_PASSWORD="contraseña_de_aplicacion_16_caracteres"
+MAIL_ENCRYPTION=tls
+MAIL_FROM_ADDRESS="tu_email@gmail.com"
+MAIL_FROM_NAME="${APP_NAME}"
+
+⚠️ IMPORTANTE:
+- NO uses tu contraseña normal de Gmail
+- USA la contraseña de aplicación generada
+- La contraseña de aplicación es de 16 caracteres sin espacios

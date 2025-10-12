@@ -1,0 +1,27 @@
+# Configuración ProtonMail SMTP
+# IMPORTANTE: ProtonMail requiere configuración especial
+
+# Opción 1: ProtonMail Bridge (Recomendado)
+MAIL_MAILER=smtp
+MAIL_HOST=127.0.0.1
+MAIL_PORT=1025
+MAIL_USERNAME="webmaster-admin2025@proton.me"
+MAIL_PASSWORD="C@mp3ch3Vict0r"
+MAIL_ENCRYPTION=null
+MAIL_FROM_ADDRESS="webmaster-admin2025@proton.me"
+MAIL_FROM_NAME="${APP_NAME}"
+
+# Opción 2: SMTP Directo (Puede no funcionar)
+MAIL_MAILER=smtp
+MAIL_HOST=smtp.proton.me
+MAIL_PORT=587
+MAIL_USERNAME="webmaster-admin2025@proton.me"
+MAIL_PASSWORD="C@mp3ch3Vict0r"
+MAIL_ENCRYPTION=tls
+MAIL_FROM_ADDRESS="webmaster-admin2025@proton.me"
+MAIL_FROM_NAME="${APP_NAME}"
+
+# NOTA: ProtonMail requiere:
+# 1. ProtonMail Bridge instalado
+# 2. O usar su API oficial
+# 3. SMTP directo puede estar bloqueado
