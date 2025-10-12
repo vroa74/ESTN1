@@ -43,6 +43,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
     // Admin - Students CRUD
     Route::resource('estudiante', StudentController::class)->names('estudiante');
+    Route::patch('estudiante/{estudiante}/toggle-sexo', [StudentController::class, 'toggleSexo'])->name('estudiante.toggle-sexo');
 
     // Admin - Bitacoras CRUD
     Route::resource('bitacoras', BitacoraController::class)->names('bitacoras');

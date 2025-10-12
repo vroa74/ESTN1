@@ -15,6 +15,9 @@ class StudentController extends Controller
     {
         $query = Student::query();
 
+        // Solo mostrar estudiantes activos
+        $query->where('estatus', 'activo');
+
         // Filtro por matrícula
         if ($request->filled('matricula')) {
             $query->where('matricula', 'like', '%' . $request->matricula . '%');
@@ -153,6 +156,29 @@ class StudentController extends Controller
         } catch (\Exception $e) {
             return redirect()->route('estudiante.index')
                 ->with('error', 'No se pudo eliminar el estudiante.');
+        }
+    }
+
+    /**
+     * Toggle the sexo field of a student
+     */
+    public function toggleSexo(Student $estudiante)
+    {
+        try {
+            $estudiante->sexo = $estudiante->sexo === 'F' ? 'M' : 'F';
+            $estudiante->save();
+            
+            return response()->json([
+                'success' => true,
+                'message' => 'Sexo actualizado exitosamente',
+                'sexo' => $estudiante->sexo,
+                'sexo_text' => $estudiante->sexo === 'F' ? 'Femenino' : 'Masculino'
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Error al actualizar el sexo'
+            ], 500);
         }
     }
 }
