@@ -26,35 +26,27 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
     // Route for the getting the data feed
     Route::get('/json-data-feed', [DataFeedController::class, 'getDataFeed'])->name('json_data_feed');
-
     // Dashboard routes
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');    
     // Components page
-    Route::get('/components', function () {
-        return view('pages/components');
-    })->name('components');
-
+    Route::get('/components', function () {         return view('pages/components');      })->name('components');
     // QR Code page
     Route::get('/qr', [QrCodeController::class, 'index'])->name('qr');
     Route::post('/qr/generate', [QrCodeController::class, 'generate'])->name('qr.generate');
-
     // Admin - Usuarios CRUD
     Route::resource('usuarios', UsuarioController::class)->names('usuarios');
-
     // Admin - Students CRUD
     Route::resource('estudiante', StudentController::class)->names('estudiante');
     Route::patch('estudiante/{estudiante}/toggle-sexo', [StudentController::class, 'toggleSexo'])->name('estudiante.toggle-sexo');
-
     // Admin - Bitacoras CRUD
     Route::resource('bitacoras', BitacoraController::class)->names('bitacoras');
-
     // Admin - Reportes Alumnos CRUD
     Route::resource('reportes', ReporteAlumnoController::class)->names('reportes');
     Route::patch('reportes/{reporte}/firmar-prefecto', [ReporteAlumnoController::class, 'firmarPrefecto'])->name('reportes.firmar-prefecto');
     Route::patch('reportes/{reporte}/firmar-trabajador-social', [ReporteAlumnoController::class, 'firmarTrabajadorSocial'])->name('reportes.firmar-trabajador-social');
     Route::get('reportes/{reporte}/pdf', [ReporteAlumnoController::class, 'pdf'])->name('reportes.pdf');
-
+    // Admin - Materias
+    Route::get('materias', [App\Http\Controllers\CatalogosController::class, 'index'])->name('materias.index');
     // 404 fallback
     Route::fallback(function() {
         return view('pages/utility/404');

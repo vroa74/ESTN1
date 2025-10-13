@@ -504,6 +504,7 @@
     "Usuarios": "Usuarios",
     "Estudiantes": "Estudiantes",
     "Reportes": "Reportes",
+    "Catálogos": "Catálogos",
     "Sexo": "Sexo",
     "Seleccionar sexo": "Seleccionar sexo",
     "Masculino": "Masculino",
@@ -512,5 +513,7 @@
     "Tema": "Tema",
     "Seleccionar tema": "Seleccionar tema",
     "Claro": "Claro",
-    "Oscuro": "Oscuro"
+    "Oscuro": "Oscuro",
+    "Seleccionar Nueva Foto": "Seleccionar Nueva Foto",
+    "Eliminar Foto": "Eliminar Foto"
 }

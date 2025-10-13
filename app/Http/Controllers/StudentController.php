@@ -76,7 +76,7 @@ class StudentController extends Controller
     {
         $validated = $request->validate([
             'matricula' => 'nullable|string|max:20|unique:students,matricula',
-            'grado' => 'nullable|integer|min:1|max:9',
+            'grado' => 'nullable|integer|min:1|max:3',
             'grupo' => 'required|in:A,B,C,D,E,F,G,H,I,J,K,L',
             'Fnom' => 'nullable|string|max:255',
             'nombres' => 'nullable|string|max:255',
@@ -123,7 +123,7 @@ class StudentController extends Controller
     {
         $validated = $request->validate([
             'matricula' => 'nullable|string|max:20|unique:students,matricula,' . $estudiante->id,
-            'grado' => 'nullable|integer|min:1|max:9',
+            'grado' => 'nullable|integer|min:1|max:3',
             'grupo' => 'required|in:A,B,C,D,E,F,G,H,I,J,K,L',
             'Fnom' => 'nullable|string|max:255',
             'nombres' => 'nullable|string|max:255',

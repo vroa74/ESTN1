@@ -44,19 +44,40 @@ class UpdateProfileInformationForm extends Component
     {
         $this->resetErrorBag();
 
-        $updater->update(
-            Auth::user(),
-            $this->photo
-                ? array_merge($this->state, ['photo' => $this->photo])
-                : $this->state
-        );
+        // Si hay una nueva foto, procesarla
+        if ($this->photo) {
+            $this->validate([
+                'photo' => 'nullable|mimes:jpg,jpeg,png|max:1024',
+            ]);
+
+            // Eliminar foto anterior si existe
+            $user = Auth::user();
+            if ($user->profile_photo_path) {
+                if (Storage::disk('public')->exists($user->profile_photo_path)) {
+                    Storage::disk('public')->delete($user->profile_photo_path);
+                } elseif (file_exists(public_path($user->profile_photo_path))) {
+                    unlink(public_path($user->profile_photo_path));
+                }
+            }
+
+            // Guardar nueva foto
+            $filename = 'profile_' . $user->id . '_' . time() . '.' . $this->photo->getClientOriginalExtension();
+            $path = $this->photo->storeAs('profile-photos', $filename, 'public');
+            
+            // Actualizar el estado con la nueva ruta de foto
+            $this->state['profile_photo_path'] = 'profile-photos/' . $filename;
+        }
+
+        $updater->update(Auth::user(), $this->state);
 
         if (isset($this->photo)) {
+            $this->emit('saved');
+            $this->emit('refresh-navigation-menu');
+            $this->emit('photo-updated');
             return redirect()->route('profile.show');
         }
 
         $this->emit('saved');
-
         $this->emit('refresh-navigation-menu');
     }
 
@@ -65,7 +86,22 @@ class UpdateProfileInformationForm extends Component
      */
     public function deleteProfilePhoto(): void
     {
-        Auth::user()->deleteProfilePhoto();
+        $user = Auth::user();
+        
+        // Eliminar archivo físico si existe
+        if ($user->profile_photo_path) {
+            if (Storage::disk('public')->exists($user->profile_photo_path)) {
+                Storage::disk('public')->delete($user->profile_photo_path);
+            } elseif (file_exists(public_path($user->profile_photo_path))) {
+                unlink(public_path($user->profile_photo_path));
+            }
+        }
+
+        // Actualizar en base de datos
+        $user->update(['profile_photo_path' => null]);
+        
+        // Actualizar el estado
+        $this->state['profile_photo_path'] = null;
 
         $this->emit('refresh-navigation-menu');
     }

@@ -26,8 +26,13 @@
 
                 <!-- Current Profile Photo -->
                 <div class="mt-2" x-show="! photoPreview">
-                    <img src="{{ $this->user->profile_photo_url }}" alt="{{ $this->user->name }}"
-                        class="rounded-full h-20 w-20 object-cover">
+                    <img src="{{ $this->user->profile_photo_url }}?v={{ time() }}" alt="{{ $this->user->name }}"
+                        class="rounded-full h-20 w-20 object-cover"
+                        onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div style="display:none;"
+                        class="rounded-full h-20 w-20 bg-violet-100 flex items-center justify-center text-violet-600 font-semibold text-lg">
+                        {{ substr($this->user->name, 0, 1) }}{{ substr(explode(' ', $this->user->name)[1] ?? '', 0, 1) }}
+                    </div>
                 </div>
 
                 <!-- New Profile Photo Preview -->
@@ -38,12 +43,12 @@
                 </div>
 
                 <x-secondary-button class="mt-2 me-2" type="button" x-on:click.prevent="$refs.photo.click()">
-                    {{ __('Select A New Photo') }}
+                    {{ __('Seleccionar Nueva Foto') }}
                 </x-secondary-button>
 
                 @if ($this->user->profile_photo_path)
                     <x-secondary-button type="button" class="mt-2" wire:click="deleteProfilePhoto">
-                        {{ __('Remove Photo') }}
+                        {{ __('Eliminar Foto') }}
                     </x-secondary-button>
                 @endif
 

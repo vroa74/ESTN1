@@ -31,7 +31,7 @@
                                 <div>
                                     <x-label for="grado" value="{{ __('Grado') }}" />
                                     <x-input id="grado" type="number" name="grado" :value="old('grado', $estudiante->grado)"
-                                        min="1" max="9" class="mt-1 block w-full" />
+                                        min="1" max="3" class="mt-1 block w-full" />
                                     <x-input-error for="grado" class="mt-2" />
                                 </div>
 

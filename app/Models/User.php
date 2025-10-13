@@ -6,6 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Storage;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
@@ -74,13 +75,30 @@ class User extends Authenticatable
      */
     public function getProfilePhotoUrlAttribute()
     {
-        // Si tenemos una foto personalizada y existe el archivo
-        if ($this->profile_photo_path && file_exists(public_path($this->profile_photo_path))) {
-            return asset($this->profile_photo_path);
+        // Si tenemos una foto personalizada
+        if ($this->profile_photo_path) {
+            // Verificar si existe en storage
+            if (Storage::disk('public')->exists($this->profile_photo_path)) {
+                $url = Storage::disk('public')->url($this->profile_photo_path);
+                // Arreglar doble barra en la URL
+                return str_replace('//storage', '/storage', $url);
+            }
+            // Verificar si existe en public (para compatibilidad con fotos anteriores)
+            if (file_exists(public_path($this->profile_photo_path))) {
+                return asset($this->profile_photo_path);
+            }
         }
         
         // Fallback a avatar con iniciales usando UI Avatars
-        return "https://ui-avatars.com/api/?name=" . urlencode($this->name) . "&color=7F9CF5&background=EBF4FF";
+        $initials = '';
+        $nameParts = explode(' ', $this->name);
+        foreach ($nameParts as $part) {
+            if (!empty($part)) {
+                $initials .= strtoupper(substr($part, 0, 1));
+            }
+        }
+        
+        return "https://ui-avatars.com/api/?name=" . urlencode($initials) . "&color=7F9CF5&background=EBF4FF&size=80";
     }
 
     /**
