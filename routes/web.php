@@ -47,6 +47,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('reportes/{reporte}/pdf', [ReporteAlumnoController::class, 'pdf'])->name('reportes.pdf');
     // Admin - Materias
     Route::get('materias', [App\Http\Controllers\CatalogosController::class, 'index'])->name('materias.index');
+    Route::get('materias/search', [App\Http\Controllers\CatalogosController::class, 'getMaterias'])->name('materias.search');
     // 404 fallback
     Route::fallback(function() {
         return view('pages/utility/404');
