@@ -33,8 +33,9 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     // QR Code page
     Route::get('/qr', [QrCodeController::class, 'index'])->name('qr');
     Route::post('/qr/generate', [QrCodeController::class, 'generate'])->name('qr.generate');
-    // Admin - Usuarios CRUD
-    Route::resource('usuarios', UsuarioController::class)->names('usuarios');
+            // Admin - Usuarios CRUD
+            Route::get('usuarios/search', [App\Http\Controllers\Admin\UsuarioController::class, 'search'])->name('usuarios.search');
+            Route::resource('usuarios', UsuarioController::class)->names('usuarios');
     // Admin - Students CRUD
     Route::resource('estudiante', StudentController::class)->names('estudiante');
     Route::patch('estudiante/{estudiante}/toggle-sexo', [StudentController::class, 'toggleSexo'])->name('estudiante.toggle-sexo');

@@ -136,4 +136,53 @@ class UsuarioController extends Controller
 
         return redirect()->route('usuarios.index')->with('success', 'Usuario eliminado exitosamente.');
     }
+
+    /**
+     * Search users for modals
+     */
+    public function search(Request $request)
+    {
+        \Log::info('Búsqueda de usuarios iniciada', [
+            'tipo' => $request->tipo,
+            'nombre' => $request->nombre,
+            'puesto' => $request->puesto
+        ]);
+
+        $query = User::query();
+
+        // Filtros
+        if ($request->filled('nombre')) {
+            $query->where('name', 'like', '%' . $request->nombre . '%');
+        }
+
+        // Filtrar por tipo específico (esto ya incluye el filtro de puesto)
+        if ($request->filled('tipo')) {
+            switch ($request->tipo) {
+                case 'profesor':
+                    $query->where('puesto', 'DOCENTE');
+                    break;
+                case 'prefecto':
+                    $query->where('puesto', 'PREFECTURA');
+                    break;
+                case 'trabajador_social':
+                    $query->where('puesto', 'TRABAJO SOCIAL');
+                    break;
+            }
+        } elseif ($request->filled('puesto')) {
+            // Solo aplicar filtro de puesto si no hay tipo específico
+            $query->where('puesto', $request->puesto);
+        }
+
+        // Solo usuarios activos
+        $query->where('estatus', true);
+
+        // Log de la consulta SQL
+        \Log::info('Consulta SQL generada', ['sql' => $query->toSql(), 'bindings' => $query->getBindings()]);
+
+        $usuarios = $query->orderBy('name', 'asc')->get();
+
+        \Log::info('Usuarios encontrados', ['count' => $usuarios->count(), 'usuarios' => $usuarios->toArray()]);
+
+        return view('admin.usuarios.partials.search-table', compact('usuarios'));
+    }
 }
