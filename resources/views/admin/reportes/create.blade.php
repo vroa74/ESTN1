@@ -119,25 +119,6 @@
                                     @enderror
                                 </div>
 
-                                <div class="md:col-span-2">
-                                    <label for="profesor_id"
-                                        class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                                        {{ __('Profesor') }} <span class="text-red-500">*</span>
-                                    </label>
-                                    <select id="profesor_id" name="profesor_id" required
-                                        class="w-full px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-md focus:ring-violet-500 focus:border-violet-500 dark:bg-gray-700 dark:text-gray-100">
-                                        <option value="">{{ __('Seleccionar profesor') }}</option>
-                                        @foreach ($profesores as $profesor)
-                                            <option value="{{ $profesor->id }}"
-                                                {{ old('profesor_id') == $profesor->id ? 'selected' : '' }}>
-                                                {{ $profesor->name }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                    @error('profesor_id')
-                                        <p class="mt-1 text-xs text-red-600 dark:text-red-400">{{ $message }}</p>
-                                    @enderror
-                                </div>
                             </div>
                         </div>
 
@@ -160,6 +141,74 @@
                                 <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">
                                     Máximo 2000 caracteres
                                 </p>
+                            </div>
+                        </div>
+
+                        <!-- Información del Profesor -->
+                        <div class="mb-6">
+                            <h3 class="text-lg font-medium text-gray-900 dark:text-gray-100 mb-4">
+                                {{ __('Información del Profesor') }}
+                            </h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="md:col-span-2">
+                                    <label for="profesor_id"
+                                        class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                                        {{ __('Profesor') }} <span class="text-red-500">*</span>
+                                    </label>
+                                    <select id="profesor_id" name="profesor_id" required
+                                        class="w-full px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-md focus:ring-violet-500 focus:border-violet-500 dark:bg-gray-700 dark:text-gray-100">
+                                        <option value="">{{ __('Seleccionar profesor') }}</option>
+                                        @foreach ($profesores as $profesor)
+                                            <option value="{{ $profesor->id }}"
+                                                {{ old('profesor_id') == $profesor->id ? 'selected' : '' }}>
+                                                {{ $profesor->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    @error('profesor_id')
+                                        <p class="mt-1 text-xs text-red-600 dark:text-red-400">{{ $message }}</p>
+                                    @enderror
+                                </div>
+
+                                <div>
+                                    <label for="prefecto_id"
+                                        class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                                        {{ __('Prefectura') }} <span class="text-red-500">*</span>
+                                    </label>
+                                    <select id="prefecto_id" name="prefecto_id" required
+                                        class="w-full px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-md focus:ring-violet-500 focus:border-violet-500 dark:bg-gray-700 dark:text-gray-100">
+                                        <option value="">{{ __('Seleccionar prefecto') }}</option>
+                                        @foreach ($prefectos as $prefecto)
+                                            <option value="{{ $prefecto->id }}"
+                                                {{ old('prefecto_id') == $prefecto->id ? 'selected' : '' }}>
+                                                {{ $prefecto->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    @error('prefecto_id')
+                                        <p class="mt-1 text-xs text-red-600 dark:text-red-400">{{ $message }}</p>
+                                    @enderror
+                                </div>
+
+                                <div>
+                                    <label for="trabajo_social_id"
+                                        class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                                        {{ __('Trabajo Social') }} <span class="text-red-500">*</span>
+                                    </label>
+                                    <select id="trabajo_social_id" name="trabajo_social_id" required
+                                        class="w-full px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-md focus:ring-violet-500 focus:border-violet-500 dark:bg-gray-700 dark:text-gray-100">
+                                        <option value="">{{ __('Seleccionar trabajador social') }}</option>
+                                        @foreach ($trabajadores_sociales as $trabajador)
+                                            <option value="{{ $trabajador->id }}"
+                                                {{ old('trabajo_social_id') == $trabajador->id ? 'selected' : '' }}>
+                                                {{ $trabajador->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    @error('trabajo_social_id')
+                                        <p class="mt-1 text-xs text-red-600 dark:text-red-400">{{ $message }}</p>
+                                    @enderror
+                                </div>
                             </div>
                         </div>
 
@@ -657,6 +706,12 @@
         document.getElementById('student-modal').addEventListener('click', function(e) {
             if (e.target === this) {
                 closeStudentModal();
+            }
+        });
+
+        document.getElementById('materia-modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeMateriaModal();
             }
         });
     </script>

@@ -64,7 +64,17 @@ class ReporteAlumnoController extends Controller
             ->orderBy('name')
             ->get();
 
-        return view('admin.reportes.create', compact('estudiantes', 'profesores'));
+        $prefectos = User::where('puesto', 'PREFECTURA')
+            ->where('estatus', true)
+            ->orderBy('name')
+            ->get();
+
+        $trabajadores_sociales = User::where('puesto', 'TRABAJO SOCIAL')
+            ->where('estatus', true)
+            ->orderBy('name')
+            ->get();
+
+        return view('admin.reportes.create', compact('estudiantes', 'profesores', 'prefectos', 'trabajadores_sociales'));
     }
 
     /**
