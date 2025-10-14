@@ -24,6 +24,9 @@ class UsuarioController extends Controller
      */
     public function create()
     {
+        // Limpiar datos antiguos de la sesión para evitar que los campos se llenen con valores previos
+        session()->forget('_old_input');
+        
         return view('admin.usuarios.create');
     }
 
@@ -142,10 +145,11 @@ class UsuarioController extends Controller
      */
     public function search(Request $request)
     {
-        \Log::info('Búsqueda de usuarios iniciada', [
+        \Log::info('=== BÚSQUEDA DE USUARIOS INICIADA ===', [
             'tipo' => $request->tipo,
             'nombre' => $request->nombre,
-            'puesto' => $request->puesto
+            'puesto' => $request->puesto,
+            'all_params' => $request->all()
         ]);
 
         $query = User::query();
@@ -181,7 +185,21 @@ class UsuarioController extends Controller
 
         $usuarios = $query->orderBy('name', 'asc')->get();
 
-        \Log::info('Usuarios encontrados', ['count' => $usuarios->count(), 'usuarios' => $usuarios->toArray()]);
+        \Log::info('=== RESULTADOS DE LA BÚSQUEDA ===', [
+            'count' => $usuarios->count(),
+            'usuarios' => $usuarios->toArray(),
+            'sql_query' => $query->toSql(),
+            'sql_bindings' => $query->getBindings()
+        ]);
+
+        // Usar vista específica según el tipo
+        if ($request->tipo === 'profesor') {
+            return view('admin.usuarios.partials.docentes-search-table', compact('usuarios'));
+        } elseif ($request->tipo === 'prefecto') {
+            return view('admin.usuarios.partials.prefectos-search-table', compact('usuarios'));
+        } elseif ($request->tipo === 'trabajador_social') {
+            return view('admin.usuarios.partials.trabajadores-sociales-search-table', compact('usuarios'));
+        }
 
         return view('admin.usuarios.partials.search-table', compact('usuarios'));
     }

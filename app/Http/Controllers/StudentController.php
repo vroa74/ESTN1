@@ -66,6 +66,9 @@ class StudentController extends Controller
      */
     public function create()
     {
+        // Limpiar datos antiguos de la sesión para evitar que los campos se llenen con valores previos
+        session()->forget('_old_input');
+        
         return view('admin.students.create');
     }
 
@@ -114,6 +117,33 @@ class StudentController extends Controller
     public function edit(Student $estudiante)
     {
         return view('admin.students.edit', compact('estudiante'));
+    }
+
+    /**
+     * Search students for AJAX requests
+     */
+    public function search(Request $request)
+    {
+        $query = Student::query();
+
+        // Solo mostrar estudiantes activos
+        $query->where('estatus', 'activo');
+
+        // Filtro por nombre completo (busca en nombres, apa, ama)
+        if ($request->filled('nombre')) {
+            $query->where(function($q) use ($request) {
+                $q->where('nombres', 'like', '%' . $request->nombre . '%')
+                  ->orWhere('apa', 'like', '%' . $request->nombre . '%')
+                  ->orWhere('ama', 'like', '%' . $request->nombre . '%');
+            });
+        }
+
+        $students = $query->orderBy('apa', 'asc')
+            ->orderBy('ama', 'asc')
+            ->orderBy('nombres', 'asc')
+            ->get();
+
+        return view('admin.students.partials.search-table', compact('students'));
     }
 
     /**

@@ -22,6 +22,7 @@ use App\Http\Controllers\ReporteAlumnoController;
 
 Route::redirect('/', 'login');
 
+
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
     // Route for the getting the data feed
@@ -39,6 +40,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     // Admin - Students CRUD
     Route::resource('estudiante', StudentController::class)->names('estudiante');
     Route::patch('estudiante/{estudiante}/toggle-sexo', [StudentController::class, 'toggleSexo'])->name('estudiante.toggle-sexo');
+    Route::get('estudiante/search', [StudentController::class, 'search'])->name('estudiante.search');
     // Admin - Bitacoras CRUD
     Route::resource('bitacoras', BitacoraController::class)->names('bitacoras');
     // Admin - Reportes Alumnos CRUD
@@ -49,6 +51,49 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     // Admin - Materias
     Route::get('materias', [App\Http\Controllers\CatalogosController::class, 'index'])->name('materias.index');
     Route::get('materias/search', [App\Http\Controllers\CatalogosController::class, 'getMaterias'])->name('materias.search');
+    
+    // Debug route para verificar docentes
+    Route::get('debug/docentes', function() {
+        $docentes = App\Models\User::where('puesto', 'DOCENTE')->get(['id', 'name', 'email', 'puesto', 'estatus']);
+        $allUsers = App\Models\User::all(['id', 'name', 'email', 'puesto', 'estatus']);
+        
+        $html = '<h1>Debug de Usuarios</h1>';
+        $html .= '<h2>Usuarios con puesto DOCENTE (' . $docentes->count() . '):</h2>';
+        foreach($docentes as $user) {
+            $html .= '<p>ID: ' . $user->id . ' | Nombre: ' . $user->name . ' | Puesto: [' . $user->puesto . '] | Email: ' . $user->email . '</p>';
+        }
+        
+        $html .= '<h2>Todos los usuarios (' . $allUsers->count() . '):</h2>';
+        foreach($allUsers as $user) {
+            $html .= '<p>ID: ' . $user->id . ' | Nombre: ' . $user->name . ' | Puesto: [' . $user->puesto . '] | Email: ' . $user->email . '</p>';
+        }
+        
+        return $html;
+    });
+
+    // Debug route para verificar reportes (sin auth)
+    Route::get('debug/reportes-public', function() {
+        $reporte = App\Models\ReporteAlumno::with(['student', 'profesor', 'prefecto', 'trabajadorSocial'])->latest()->first();
+        
+        if (!$reporte) {
+            return 'No hay reportes en la base de datos';
+        }
+
+        $html = '<h1>Debug del Último Reporte</h1>';
+        $html .= '<h2>Datos del Reporte:</h2>';
+        $html .= '<p>ID: ' . $reporte->id . '</p>';
+        $html .= '<p>Fecha: ' . ($reporte->fecha_reporte ? $reporte->fecha_reporte->format('Y-m-d') : 'NULL') . '</p>';
+        $html .= '<p>Materia: ' . $reporte->materia . '</p>';
+        $html .= '<p>Estado: ' . $reporte->estado . '</p>';
+        
+        $html .= '<h2>Relaciones:</h2>';
+        $html .= '<p>Estudiante: ' . ($reporte->student ? $reporte->student->full_name : 'NULL') . '</p>';
+        $html .= '<p>Profesor ID: ' . $reporte->profesor_id . ' - Nombre: ' . ($reporte->profesor ? $reporte->profesor->name : 'NULL') . '</p>';
+        $html .= '<p>Prefecto ID: ' . $reporte->prefecto_id . ' - Nombre: ' . ($reporte->prefecto ? $reporte->prefecto->name : 'NULL') . '</p>';
+        $html .= '<p>Trabajo Social ID: ' . $reporte->trabajo_social_id . ' - Nombre: ' . ($reporte->trabajadorSocial ? $reporte->trabajadorSocial->name : 'NULL') . '</p>';
+
+        return $html;
+    });
     // 404 fallback
     Route::fallback(function() {
         return view('pages/utility/404');

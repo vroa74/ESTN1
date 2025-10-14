@@ -5,9 +5,9 @@ la barra de menu es posible convertirla en en horizonta que que esta en la parte
 
 necesito que en el indes se pueda hacer filtro de  los campos Matrícula 	Nombre Completo 	Grado 	Grupo 	Email  pero los cambios se haran live
 
+te pedi que cre3ara un modal  como el de estudiantes para que se seleciona a los docentes
 
-
-
+en lugar de la columna profeso por una columna que disga responsales y pon los 3 nombre, docente, prefectura y trabajo social cada uno con el colos asignado en el create y el edit
 
 
 

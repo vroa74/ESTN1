@@ -19,6 +19,9 @@ class BitacoraController extends Controller
      */
     public function create()
     {
+        // Limpiar datos antiguos de la sesión para evitar que los campos se llenen con valores previos
+        session()->forget('_old_input');
+        
         //
     }
 

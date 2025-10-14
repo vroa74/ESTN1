@@ -31,7 +31,8 @@
                                 Reporte #{{ $reporte->id }}
                             </h3>
                             <p class="text-sm text-gray-500 dark:text-gray-400">
-                                Creado el {{ $reporte->created_at->format('d/m/Y H:i:s') }}
+                                Creado el
+                                {{ $reporte->created_at ? $reporte->created_at->format('d/m/Y H:i:s') : 'Fecha no disponible' }}
                             </p>
                         </div>
                         <div class="flex space-x-2">
@@ -155,15 +156,51 @@
                                     <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">Fecha del Reporte
                                     </dt>
                                     <dd class="text-sm text-gray-900 dark:text-gray-100">
-                                        {{ $reporte->fecha_reporte->format('d/m/Y') }}</dd>
+                                        {{ $reporte->fecha_reporte ? $reporte->fecha_reporte->format('d/m/Y') : 'Fecha no disponible' }}
+                                    </dd>
                                 </div>
                                 <div>
                                     <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">Materia</dt>
                                     <dd class="text-sm text-gray-900 dark:text-gray-100">{{ $reporte->materia }}</dd>
                                 </div>
                                 <div>
-                                    <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">Profesor</dt>
-                                    <dd class="text-sm text-gray-900 dark:text-gray-100">{{ $reporte->profesor->name }}
+                                    <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">Responsables</dt>
+                                    <dd class="mt-2 space-y-2">
+                                        <!-- Docente (Amber) -->
+                                        <div class="flex items-center">
+                                            <span
+                                                class="inline-flex items-center px-2 py-1 rounded text-xs font-medium bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-400">
+                                                <svg class="w-3 h-3 mr-1.5" fill="currentColor" viewBox="0 0 20 20">
+                                                    <path
+                                                        d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z" />
+                                                </svg>
+                                                Docente: {{ $reporte->profesor->name ?? 'N/A' }}
+                                            </span>
+                                        </div>
+                                        <!-- Prefecto (Gray) -->
+                                        <div class="flex items-center">
+                                            <span
+                                                class="inline-flex items-center px-2 py-1 rounded text-xs font-medium bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300">
+                                                <svg class="w-3 h-3 mr-1.5" fill="currentColor" viewBox="0 0 20 20">
+                                                    <path fill-rule="evenodd"
+                                                        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z"
+                                                        clip-rule="evenodd" />
+                                                </svg>
+                                                Prefecto: {{ $reporte->prefecto->name ?? 'N/A' }}
+                                            </span>
+                                        </div>
+                                        <!-- Trabajo Social (Green) -->
+                                        <div class="flex items-center">
+                                            <span
+                                                class="inline-flex items-center px-2 py-1 rounded text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400">
+                                                <svg class="w-3 h-3 mr-1.5" fill="currentColor" viewBox="0 0 20 20">
+                                                    <path fill-rule="evenodd"
+                                                        d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
+                                                        clip-rule="evenodd" />
+                                                </svg>
+                                                Trabajo Social: {{ $reporte->trabajadorSocial->name ?? 'N/A' }}
+                                            </span>
+                                        </div>
                                     </dd>
                                 </div>
                                 <div>
@@ -206,9 +243,10 @@
                             </h4>
                             <div class="bg-gray-50 dark:bg-gray-700/50 rounded-lg p-4">
                                 <dl class="space-y-3">
-                                    @if ($reporte->prefecto)
+                                    @if ($reporte->prefecto && $reporte->firma_prefecto_at)
                                         <div>
-                                            <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">Firmado por
+                                            <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">Firmado
+                                                por
                                                 Prefecto</dt>
                                             <dd class="text-sm text-gray-900 dark:text-gray-100">
                                                 {{ $reporte->prefecto->name }} -
@@ -216,9 +254,10 @@
                                             </dd>
                                         </div>
                                     @endif
-                                    @if ($reporte->trabajadorSocial)
+                                    @if ($reporte->trabajadorSocial && $reporte->firma_trabajo_social_at)
                                         <div>
-                                            <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">Firmado por
+                                            <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">Firmado
+                                                por
                                                 Trabajo Social</dt>
                                             <dd class="text-sm text-gray-900 dark:text-gray-100">
                                                 {{ $reporte->trabajadorSocial->name }} -

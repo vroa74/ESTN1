@@ -202,7 +202,7 @@
         <div class="signature-box">
             <div class="signature-line"></div>
             <div class="signature-label">Firma del Prefecto</div>
-            @if ($reporte->prefecto)
+            @if ($reporte->prefecto && $reporte->firma_prefecto_at)
                 <div style="font-size: 10px; margin-top: 5px;">{{ $reporte->prefecto->name }}</div>
                 <div style="font-size: 9px; margin-top: 2px;">{{ $reporte->firma_prefecto_at->format('d/m/Y H:i') }}
                 </div>
@@ -212,7 +212,7 @@
         <div class="signature-box">
             <div class="signature-line"></div>
             <div class="signature-label">Trabajo Social</div>
-            @if ($reporte->trabajadorSocial)
+            @if ($reporte->trabajadorSocial && $reporte->firma_trabajo_social_at)
                 <div style="font-size: 10px; margin-top: 5px;">{{ $reporte->trabajadorSocial->name }}</div>
                 <div style="font-size: 9px; margin-top: 2px;">
                     {{ $reporte->firma_trabajo_social_at->format('d/m/Y H:i') }}</div>

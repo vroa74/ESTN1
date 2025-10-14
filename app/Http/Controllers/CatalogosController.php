@@ -28,13 +28,19 @@ class CatalogosController extends Controller
         }
 
         // Buscar por nombre de materia si se proporciona
-        if ($request->filled('materia')) {
-            $query->where('materia', 'like', '%' . $request->materia . '%');
+        if ($request->filled('nombre') || $request->filled('materia')) {
+            $searchTerm = $request->filled('nombre') ? $request->nombre : $request->materia;
+            $query->where('materia', 'like', '%' . $searchTerm . '%');
         }
 
         $materias = $query->orderBy('grado', 'asc')
             ->orderBy('materia', 'asc')
             ->get();
+
+        // Si es una petición AJAX para modal, retornar vista
+        if ($request->ajax() && $request->has('modal')) {
+            return view('admin.materias.partials.search-table', compact('materias'));
+        }
 
         return response()->json([
             'materias' => $materias

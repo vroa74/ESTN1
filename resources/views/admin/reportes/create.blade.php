@@ -6,7 +6,7 @@
     </x-slot>
 
     <div class="py-6">
-        <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
+        <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6">
                     <form action="{{ route('reportes.store') }}" method="POST">
@@ -25,17 +25,17 @@
 
                                     <!-- Estudiante seleccionado -->
                                     <div id="selected-student"
-                                        class="hidden mb-3 p-3 bg-violet-50 dark:bg-violet-900/20 border border-violet-200 dark:border-violet-800 rounded-md">
+                                        class="hidden mb-2 sm:mb-3 p-2 sm:p-3 bg-violet-50 dark:bg-violet-900/20 border border-violet-200 dark:border-violet-800 rounded-md">
                                         <div class="flex items-center justify-between">
                                             <div>
-                                                <p class="text-sm font-medium text-violet-900 dark:text-violet-100"
+                                                <p class="text-xs sm:text-sm font-medium text-violet-900 dark:text-violet-100"
                                                     id="student-name"></p>
                                                 <p class="text-xs text-violet-700 dark:text-violet-300"
                                                     id="student-info"></p>
                                             </div>
                                             <button type="button" onclick="clearSelectedStudent()"
                                                 class="text-violet-500 hover:text-violet-700 dark:text-violet-400 dark:hover:text-violet-200">
-                                                <svg class="w-5 h-5" fill="none" stroke="currentColor"
+                                                <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor"
                                                     viewBox="0 0 24 24">
                                                     <path stroke-linecap="round" stroke-linejoin="round"
                                                         stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
@@ -46,7 +46,7 @@
 
                                     <!-- Botón para abrir modal -->
                                     <button type="button" id="select-student-btn" onclick="openStudentModal()"
-                                        class="w-full px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-md focus:ring-violet-500 focus:border-violet-500 dark:bg-gray-700 dark:text-gray-100 text-left bg-white hover:bg-gray-50 dark:hover:bg-gray-600">
+                                        class="w-full px-2 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm border border-gray-300 dark:border-gray-600 rounded-md focus:ring-violet-500 focus:border-violet-500 dark:bg-gray-700 dark:text-gray-100 text-left bg-white hover:bg-gray-50 dark:hover:bg-gray-600">
                                         <span
                                             class="text-gray-500 dark:text-gray-400">{{ __('Hacer clic para seleccionar estudiante') }}</span>
                                     </button>
@@ -73,7 +73,7 @@
                                     </label>
                                     <input type="date" id="fecha_reporte" name="fecha_reporte" required
                                         value="{{ old('fecha_reporte', date('Y-m-d')) }}"
-                                        class="w-full px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-md focus:ring-violet-500 focus:border-violet-500 dark:bg-gray-700 dark:text-gray-100">
+                                        class="w-full px-2 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm border border-gray-300 dark:border-gray-600 rounded-md focus:ring-violet-500 focus:border-violet-500 dark:bg-gray-700 dark:text-gray-100">
                                     @error('fecha_reporte')
                                         <p class="mt-1 text-xs text-red-600 dark:text-red-400">{{ $message }}</p>
                                     @enderror
@@ -86,17 +86,17 @@
 
                                     <!-- Materia seleccionada -->
                                     <div id="selected-materia"
-                                        class="hidden mb-3 p-3 bg-violet-50 dark:bg-violet-900/20 border border-violet-200 dark:border-violet-800 rounded-md">
+                                        class="hidden mb-2 sm:mb-3 p-2 sm:p-3 bg-violet-50 dark:bg-violet-900/20 border border-violet-200 dark:border-violet-800 rounded-md">
                                         <div class="flex items-center justify-between">
                                             <div>
-                                                <p class="text-sm font-medium text-violet-900 dark:text-violet-100"
+                                                <p class="text-xs sm:text-sm font-medium text-violet-900 dark:text-violet-100"
                                                     id="materia-name"></p>
                                                 <p class="text-xs text-violet-700 dark:text-violet-300"
                                                     id="materia-info"></p>
                                             </div>
                                             <button type="button" onclick="clearSelectedMateria()"
                                                 class="text-violet-500 hover:text-violet-700 dark:text-violet-400 dark:hover:text-violet-200">
-                                                <svg class="w-5 h-5" fill="none" stroke="currentColor"
+                                                <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor"
                                                     viewBox="0 0 24 24">
                                                     <path stroke-linecap="round" stroke-linejoin="round"
                                                         stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
@@ -107,7 +107,7 @@
 
                                     <!-- Botón para abrir modal -->
                                     <button type="button" id="select-materia-btn" onclick="openMateriaModal()"
-                                        class="w-full px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-md focus:ring-violet-500 focus:border-violet-500 dark:bg-gray-700 dark:text-gray-100 text-left bg-white hover:bg-gray-50 dark:hover:bg-gray-600"
+                                        class="w-full px-2 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm border border-gray-300 dark:border-gray-600 rounded-md focus:ring-violet-500 focus:border-violet-500 dark:bg-gray-700 dark:text-gray-100 text-left bg-white hover:bg-gray-50 dark:hover:bg-gray-600"
                                         disabled>
                                         <span
                                             class="text-gray-500 dark:text-gray-400">{{ __('Primero selecciona un estudiante') }}</span>
@@ -132,15 +132,147 @@
                                     class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                                     {{ __('Descripción') }} <span class="text-red-500">*</span>
                                 </label>
-                                <textarea id="descripcion_reporte" name="descripcion_reporte" required rows="6"
+                                <textarea id="descripcion_reporte" name="descripcion_reporte" required rows="4"
                                     placeholder="Describe detalladamente la situación o conducta del estudiante..."
-                                    class="w-full px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-md focus:ring-violet-500 focus:border-violet-500 dark:bg-gray-700 dark:text-gray-100">{{ old('descripcion_reporte') }}</textarea>
+                                    class="w-full px-2 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm border border-gray-300 dark:border-gray-600 rounded-md focus:ring-violet-500 focus:border-violet-500 dark:bg-gray-700 dark:text-gray-100">{{ old('descripcion_reporte') }}</textarea>
                                 @error('descripcion_reporte')
                                     <p class="mt-1 text-xs text-red-600 dark:text-red-400">{{ $message }}</p>
                                 @enderror
                                 <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">
                                     Máximo 2000 caracteres
                                 </p>
+                            </div>
+                        </div>
+
+                        <!-- Personal Académico -->
+                        <div class="mb-6">
+                            <h3 class="text-lg font-medium text-gray-900 dark:text-gray-100 mb-4">
+                                {{ __('Personal Académico') }}
+                            </h3>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                <!-- Docente -->
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                                        {{ __('Docente') }} <span class="text-red-500">*</span>
+                                    </label>
+
+                                    <!-- Docente seleccionado -->
+                                    <div id="selected-docente"
+                                        class="hidden mb-2 sm:mb-3 p-2 sm:p-3 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-md">
+                                        <div class="flex items-center justify-between">
+                                            <div>
+                                                <p class="text-xs sm:text-sm font-medium text-amber-900 dark:text-amber-100"
+                                                    id="docente-name"></p>
+                                                <p class="text-xs text-amber-700 dark:text-amber-300"
+                                                    id="docente-info"></p>
+                                            </div>
+                                            <button type="button" onclick="clearSelectedDocente()"
+                                                class="text-amber-500 hover:text-amber-700 dark:text-amber-400 dark:hover:text-amber-200">
+                                                <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none"
+                                                    stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <!-- Botón para abrir modal -->
+                                    <button type="button" id="select-docente-btn" onclick="openDocenteModal()"
+                                        class="w-full px-2 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm border border-gray-300 dark:border-gray-600 rounded-md focus:ring-amber-500 focus:border-amber-500 dark:bg-gray-700 dark:text-gray-100 text-left bg-white hover:bg-gray-50 dark:hover:bg-gray-600">
+                                        <span
+                                            class="text-gray-500 dark:text-gray-400">{{ __('Hacer clic para seleccionar docente') }}</span>
+                                    </button>
+
+                                    <input type="hidden" id="docente_id" name="docente_id"
+                                        value="{{ old('docente_id') }}">
+                                    @error('docente_id')
+                                        <p class="mt-1 text-xs text-red-600 dark:text-red-400">{{ $message }}</p>
+                                    @enderror
+                                </div>
+
+                                <!-- Prefecto -->
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                                        {{ __('Prefecto') }} <span class="text-red-500">*</span>
+                                    </label>
+
+                                    <!-- Prefecto seleccionado -->
+                                    <div id="selected-prefecto"
+                                        class="hidden mb-2 sm:mb-3 p-2 sm:p-3 bg-gray-50 dark:bg-gray-800/20 border border-gray-200 dark:border-gray-600 rounded-md">
+                                        <div class="flex items-center justify-between">
+                                            <div>
+                                                <p class="text-xs sm:text-sm font-medium text-gray-900 dark:text-gray-100"
+                                                    id="prefecto-name"></p>
+                                                <p class="text-xs text-gray-700 dark:text-gray-300"
+                                                    id="prefecto-info"></p>
+                                            </div>
+                                            <button type="button" onclick="clearSelectedPrefecto()"
+                                                class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+                                                <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none"
+                                                    stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <!-- Botón para abrir modal -->
+                                    <button type="button" id="select-prefecto-btn" onclick="openPrefectoModal()"
+                                        class="w-full px-2 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm border border-gray-300 dark:border-gray-600 rounded-md focus:ring-gray-500 focus:border-gray-500 dark:bg-gray-700 dark:text-gray-100 text-left bg-white hover:bg-gray-50 dark:hover:bg-gray-600">
+                                        <span
+                                            class="text-gray-500 dark:text-gray-400">{{ __('Hacer clic para seleccionar prefecto') }}</span>
+                                    </button>
+
+                                    <input type="hidden" id="prefecto_id" name="prefecto_id"
+                                        value="{{ old('prefecto_id') }}">
+                                    @error('prefecto_id')
+                                        <p class="mt-1 text-xs text-red-600 dark:text-red-400">{{ $message }}</p>
+                                    @enderror
+                                </div>
+
+                                <!-- Trabajador Social -->
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                                        {{ __('Trabajador Social') }} <span class="text-red-500">*</span>
+                                    </label>
+
+                                    <!-- Trabajador Social seleccionado -->
+                                    <div id="selected-trabajador-social"
+                                        class="hidden mb-2 sm:mb-3 p-2 sm:p-3 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-md">
+                                        <div class="flex items-center justify-between">
+                                            <div>
+                                                <p class="text-xs sm:text-sm font-medium text-green-900 dark:text-green-100"
+                                                    id="trabajador-social-name"></p>
+                                                <p class="text-xs text-green-700 dark:text-green-300"
+                                                    id="trabajador-social-info"></p>
+                                            </div>
+                                            <button type="button" onclick="clearSelectedTrabajadorSocial()"
+                                                class="text-green-500 hover:text-green-700 dark:text-green-400 dark:hover:text-green-200">
+                                                <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none"
+                                                    stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <!-- Botón para abrir modal -->
+                                    <button type="button" id="select-trabajador-social-btn"
+                                        onclick="openTrabajadorSocialModal()"
+                                        class="w-full px-2 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm border border-gray-300 dark:border-gray-600 rounded-md focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:text-gray-100 text-left bg-white hover:bg-gray-50 dark:hover:bg-gray-600">
+                                        <span
+                                            class="text-gray-500 dark:text-gray-400">{{ __('Hacer clic para seleccionar trabajador social') }}</span>
+                                    </button>
+
+                                    <input type="hidden" id="trabajador_social_id" name="trabajador_social_id"
+                                        value="{{ old('trabajador_social_id') }}">
+                                    @error('trabajador_social_id')
+                                        <p class="mt-1 text-xs text-red-600 dark:text-red-400">{{ $message }}</p>
+                                    @enderror
+                                </div>
                             </div>
                         </div>
 
@@ -154,8 +286,9 @@
                                     class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                                     {{ __('Observaciones') }}
                                 </label>
-                                <textarea id="observaciones" name="observaciones" rows="4" placeholder="Observaciones adicionales (opcional)..."
-                                    class="w-full px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-md focus:ring-violet-500 focus:border-violet-500 dark:bg-gray-700 dark:text-gray-100">{{ old('observaciones') }}</textarea>
+                                <textarea id="observaciones" name="observaciones" rows="3"
+                                    placeholder="Observaciones adicionales (opcional)..."
+                                    class="w-full px-2 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm border border-gray-300 dark:border-gray-600 rounded-md focus:ring-violet-500 focus:border-violet-500 dark:bg-gray-700 dark:text-gray-100">{{ old('observaciones') }}</textarea>
                                 @error('observaciones')
                                     <p class="mt-1 text-xs text-red-600 dark:text-red-400">{{ $message }}</p>
                                 @enderror
@@ -189,7 +322,7 @@
     <!-- Modal para seleccionar estudiante -->
     <div id="student-modal" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50 hidden">
         <div
-            class="relative top-20 mx-auto p-5 border w-11/12 max-w-4xl shadow-lg rounded-md bg-white dark:bg-gray-800">
+            class="relative top-20 mx-auto p-5 border w-11/12 max-w-5xl shadow-lg rounded-md bg-white dark:bg-gray-800">
             <div class="mt-3">
                 <div class="flex justify-between items-center mb-4">
                     <h3 class="text-lg font-medium text-gray-900 dark:text-gray-100">
@@ -354,8 +487,202 @@
         </div>
     </div>
 
+    <!-- Modal para seleccionar docente -->
+    <div id="docente-modal" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50 hidden">
+        <div
+            class="relative top-20 mx-auto p-5 border w-11/12 max-w-3xl shadow-lg rounded-md bg-white dark:bg-gray-800">
+            <div class="mt-3">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-lg font-medium text-gray-900 dark:text-gray-100">
+                        {{ __('Seleccionar Docente') }}
+                    </h3>
+                    <button type="button" onclick="closeDocenteModal()"
+                        class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Filtros -->
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                        {{ __('Buscar docente') }}
+                    </label>
+                    <input type="text" id="search-docente" placeholder="Nombre del docente..."
+                        class="w-full px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-md focus:ring-violet-500 focus:border-violet-500 dark:bg-gray-700 dark:text-gray-100">
+                </div>
+
+                <!-- Tabla de docentes -->
+                <div class="max-h-96 overflow-y-auto border border-gray-200 dark:border-gray-600 rounded-md">
+                    <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-600">
+                        <thead class="bg-gray-50 dark:bg-gray-700">
+                            <tr>
+                                <th
+                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                    {{ __('Nombre') }}
+                                </th>
+                                <th
+                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                    {{ __('Email') }}
+                                </th>
+                                <th
+                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                    {{ __('Acción') }}
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody id="docentes-table-body"
+                            class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-600">
+                            <!-- Los docentes se cargarán aquí via AJAX -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="mt-4 flex justify-end space-x-3">
+                    <button type="button" onclick="closeDocenteModal()"
+                        class="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 rounded-md transition-colors">
+                        {{ __('Cancelar') }}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para seleccionar prefecto -->
+    <div id="prefecto-modal"
+        class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50 hidden">
+        <div
+            class="relative top-20 mx-auto p-5 border w-11/12 max-w-3xl shadow-lg rounded-md bg-white dark:bg-gray-800">
+            <div class="mt-3">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-lg font-medium text-gray-900 dark:text-gray-100">
+                        {{ __('Seleccionar Prefecto') }}
+                    </h3>
+                    <button type="button" onclick="closePrefectoModal()"
+                        class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Filtros -->
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                        {{ __('Buscar prefecto') }}
+                    </label>
+                    <input type="text" id="search-prefecto" placeholder="Nombre del prefecto..."
+                        class="w-full px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-md focus:ring-violet-500 focus:border-violet-500 dark:bg-gray-700 dark:text-gray-100">
+                </div>
+
+                <!-- Tabla de prefectos -->
+                <div class="max-h-96 overflow-y-auto border border-gray-200 dark:border-gray-600 rounded-md">
+                    <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-600">
+                        <thead class="bg-gray-50 dark:bg-gray-700">
+                            <tr>
+                                <th
+                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                    {{ __('Nombre') }}
+                                </th>
+                                <th
+                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                    {{ __('Email') }}
+                                </th>
+                                <th
+                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                    {{ __('Acción') }}
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody id="prefectos-table-body"
+                            class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-600">
+                            <!-- Los prefectos se cargarán aquí via AJAX -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="mt-4 flex justify-end space-x-3">
+                    <button type="button" onclick="closePrefectoModal()"
+                        class="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 rounded-md transition-colors">
+                        {{ __('Cancelar') }}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para seleccionar trabajador social -->
+    <div id="trabajador-social-modal"
+        class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50 hidden">
+        <div
+            class="relative top-20 mx-auto p-5 border w-11/12 max-w-3xl shadow-lg rounded-md bg-white dark:bg-gray-800">
+            <div class="mt-3">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-lg font-medium text-gray-900 dark:text-gray-100">
+                        {{ __('Seleccionar Trabajador Social') }}
+                    </h3>
+                    <button type="button" onclick="closeTrabajadorSocialModal()"
+                        class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Filtros -->
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                        {{ __('Buscar trabajador social') }}
+                    </label>
+                    <input type="text" id="search-trabajador-social" placeholder="Nombre del trabajador social..."
+                        class="w-full px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-md focus:ring-violet-500 focus:border-violet-500 dark:bg-gray-700 dark:text-gray-100">
+                </div>
+
+                <!-- Tabla de trabajadores sociales -->
+                <div class="max-h-96 overflow-y-auto border border-gray-200 dark:border-gray-600 rounded-md">
+                    <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-600">
+                        <thead class="bg-gray-50 dark:bg-gray-700">
+                            <tr>
+                                <th
+                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                    {{ __('Nombre') }}
+                                </th>
+                                <th
+                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                    {{ __('Email') }}
+                                </th>
+                                <th
+                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                    {{ __('Acción') }}
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody id="trabajadores-sociales-table-body"
+                            class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-600">
+                            <!-- Los trabajadores sociales se cargarán aquí via AJAX -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="mt-4 flex justify-end space-x-3">
+                    <button type="button" onclick="closeTrabajadorSocialModal()"
+                        class="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 rounded-md transition-colors">
+                        {{ __('Cancelar') }}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
         let selectedStudent = null;
+        let selectedDocente = null;
+        let selectedPrefecto = null;
+        let selectedTrabajadorSocial = null;
 
         function openStudentModal() {
             document.getElementById('student-modal').classList.remove('hidden');
@@ -627,11 +954,248 @@
             document.getElementById('select-materia-btn').style.display = 'block';
         }
 
+        // Funciones para el modal de docentes (usando datos reales de la BD)
+        function openDocenteModal() {
+            document.getElementById('docente-modal').classList.remove('hidden');
+            loadDocentes();
+        }
+
+        function closeDocenteModal() {
+            document.getElementById('docente-modal').classList.add('hidden');
+        }
+
+        function loadDocentes() {
+            const searchTerm = document.getElementById('search-docente').value;
+            const tbody = document.getElementById('docentes-table-body');
+
+            // Mostrar loading
+            tbody.innerHTML = `
+                <tr>
+                    <td colspan="3" class="px-6 py-4 text-center text-sm text-gray-500 dark:text-gray-400">
+                        <div class="flex items-center justify-center">
+                            <svg class="animate-spin h-5 w-5 text-violet-600 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                            </svg>
+                            Cargando docentes...
+                        </div>
+                    </td>
+                </tr>
+            `;
+
+            const params = new URLSearchParams({
+                tipo: 'profesor',
+                nombre: searchTerm
+            });
+
+            fetch(`{{ route('usuarios.search') }}?${params.toString()}`, {
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                        'Accept': 'text/html'
+                    }
+                })
+                .then(response => response.text())
+                .then(html => {
+                    console.log('HTML recibido:', html);
+                    // La vista parcial ya devuelve el contenido del tbody completo
+                    tbody.innerHTML = html;
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    tbody.innerHTML = `
+                    <tr>
+                        <td colspan="3" class="px-6 py-4 text-center text-sm text-red-500">Error al cargar los docentes. Inténtalo de nuevo.</td>
+                    </tr>
+                `;
+                });
+        }
+
+        function selectDocente(id, nombre, email) {
+            selectedDocente = {
+                id: id,
+                nombre: nombre,
+                email: email
+            };
+
+            // Actualizar la UI
+            document.getElementById('docente_id').value = id;
+            document.getElementById('docente-name').textContent = nombre;
+            document.getElementById('docente-info').textContent = email;
+            document.getElementById('selected-docente').classList.remove('hidden');
+            document.getElementById('select-docente-btn').style.display = 'none';
+
+            closeDocenteModal();
+        }
+
+        function clearSelectedDocente() {
+            selectedDocente = null;
+            document.getElementById('docente_id').value = '';
+            document.getElementById('selected-docente').classList.add('hidden');
+            document.getElementById('select-docente-btn').style.display = 'block';
+        }
+
+        // Funciones para el modal de prefectos
+        function openPrefectoModal() {
+            document.getElementById('prefecto-modal').classList.remove('hidden');
+            loadPrefectos();
+        }
+
+        function closePrefectoModal() {
+            document.getElementById('prefecto-modal').classList.add('hidden');
+        }
+
+        function loadPrefectos() {
+            const searchTerm = document.getElementById('search-prefecto').value;
+            const tbody = document.getElementById('prefectos-table-body');
+
+            // Mostrar loading
+            tbody.innerHTML = `
+                <tr>
+                    <td colspan="3" class="px-6 py-4 text-center text-sm text-gray-500 dark:text-gray-400">
+                        <div class="flex items-center justify-center">
+                            <svg class="animate-spin h-5 w-5 text-blue-600 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                            </svg>
+                            Cargando prefectos...
+                        </div>
+                    </td>
+                </tr>
+            `;
+
+            const params = new URLSearchParams({
+                tipo: 'prefecto',
+                nombre: searchTerm
+            });
+
+            fetch(`{{ route('usuarios.search') }}?${params.toString()}`, {
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                        'Accept': 'text/html'
+                    }
+                })
+                .then(response => response.text())
+                .then(html => {
+                    console.log('HTML recibido:', html);
+                    // La vista parcial ya devuelve el contenido del tbody completo
+                    tbody.innerHTML = html;
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    tbody.innerHTML = `
+                    <tr>
+                        <td colspan="3" class="px-6 py-4 text-center text-sm text-red-500">Error al cargar los prefectos. Inténtalo de nuevo.</td>
+                    </tr>
+                `;
+                });
+        }
+
+        function selectPrefecto(id, nombre, email) {
+            selectedPrefecto = {
+                id: id,
+                nombre: nombre,
+                email: email
+            };
+            document.getElementById('prefecto_id').value = id;
+            document.getElementById('prefecto-name').textContent = nombre;
+            document.getElementById('prefecto-info').textContent = email;
+            document.getElementById('selected-prefecto').classList.remove('hidden');
+            document.getElementById('select-prefecto-btn').style.display = 'none';
+            closePrefectoModal();
+        }
+
+        function clearSelectedPrefecto() {
+            selectedPrefecto = null;
+            document.getElementById('prefecto_id').value = '';
+            document.getElementById('selected-prefecto').classList.add('hidden');
+            document.getElementById('select-prefecto-btn').style.display = 'block';
+        }
+
+        // Funciones para el modal de trabajador social
+        function openTrabajadorSocialModal() {
+            document.getElementById('trabajador-social-modal').classList.remove('hidden');
+            loadTrabajadoresSociales();
+        }
+
+        function closeTrabajadorSocialModal() {
+            document.getElementById('trabajador-social-modal').classList.add('hidden');
+        }
+
+        function loadTrabajadoresSociales() {
+            const searchTerm = document.getElementById('search-trabajador-social').value;
+            const tbody = document.getElementById('trabajadores-sociales-table-body');
+
+            // Mostrar loading
+            tbody.innerHTML = `
+                <tr>
+                    <td colspan="3" class="px-6 py-4 text-center text-sm text-gray-500 dark:text-gray-400">
+                        <div class="flex items-center justify-center">
+                            <svg class="animate-spin h-5 w-5 text-green-600 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                            </svg>
+                            Cargando trabajadores sociales...
+                        </div>
+                    </td>
+                </tr>
+            `;
+
+            const params = new URLSearchParams({
+                tipo: 'trabajador_social',
+                nombre: searchTerm
+            });
+
+            fetch(`{{ route('usuarios.search') }}?${params.toString()}`, {
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                        'Accept': 'text/html'
+                    }
+                })
+                .then(response => response.text())
+                .then(html => {
+                    console.log('HTML recibido:', html);
+                    // La vista parcial ya devuelve el contenido del tbody completo
+                    tbody.innerHTML = html;
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    tbody.innerHTML = `
+                    <tr>
+                        <td colspan="3" class="px-6 py-4 text-center text-sm text-red-500">Error al cargar los trabajadores sociales. Inténtalo de nuevo.</td>
+                    </tr>
+                `;
+                });
+        }
+
+        function selectTrabajadorSocial(id, nombre, email) {
+            selectedTrabajadorSocial = {
+                id: id,
+                nombre: nombre,
+                email: email
+            };
+            document.getElementById('trabajador_social_id').value = id;
+            document.getElementById('trabajador-social-name').textContent = nombre;
+            document.getElementById('trabajador-social-info').textContent = email;
+            document.getElementById('selected-trabajador-social').classList.remove('hidden');
+            document.getElementById('select-trabajador-social-btn').style.display = 'none';
+            closeTrabajadorSocialModal();
+        }
+
+        function clearSelectedTrabajadorSocial() {
+            selectedTrabajadorSocial = null;
+            document.getElementById('trabajador_social_id').value = '';
+            document.getElementById('selected-trabajador-social').classList.add('hidden');
+            document.getElementById('select-trabajador-social-btn').style.display = 'block';
+        }
+
         // Event listeners para los filtros
         document.getElementById('search-name').addEventListener('input', loadStudents);
         document.getElementById('search-grado').addEventListener('change', loadStudents);
         document.getElementById('search-grupo').addEventListener('change', loadStudents);
         document.getElementById('search-materia').addEventListener('input', loadMaterias);
+        document.getElementById('search-docente').addEventListener('input', loadDocentes);
+        document.getElementById('search-prefecto').addEventListener('input', loadPrefectos);
+        document.getElementById('search-trabajador-social').addEventListener('input', loadTrabajadoresSociales);
 
         // Cerrar modal al hacer clic fuera de él
         document.getElementById('student-modal').addEventListener('click', function(e) {
@@ -644,6 +1208,63 @@
             if (e.target === this) {
                 closeMateriaModal();
             }
+        });
+
+        document.getElementById('docente-modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeDocenteModal();
+            }
+        });
+
+        document.getElementById('prefecto-modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closePrefectoModal();
+            }
+        });
+
+        document.getElementById('trabajador-social-modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeTrabajadorSocialModal();
+            }
+        });
+
+        // Validar formulario antes de enviar
+        document.querySelector('form').addEventListener('submit', function(e) {
+            const docenteId = document.getElementById('docente_id').value;
+            const prefectoId = document.getElementById('prefecto_id').value;
+            const trabajadorSocialId = document.getElementById('trabajador_social_id').value;
+            const studentId = document.getElementById('student_id').value;
+
+            if (!docenteId) {
+                e.preventDefault();
+                alert('Por favor selecciona un docente');
+                return false;
+            }
+
+            if (!prefectoId) {
+                e.preventDefault();
+                alert('Por favor selecciona un prefecto');
+                return false;
+            }
+
+            if (!trabajadorSocialId) {
+                e.preventDefault();
+                alert('Por favor selecciona un trabajador social');
+                return false;
+            }
+
+            if (!studentId) {
+                e.preventDefault();
+                alert('Por favor selecciona un estudiante');
+                return false;
+            }
+
+            console.log('Enviando formulario con:', {
+                student_id: studentId,
+                docente_id: docenteId,
+                prefecto_id: prefectoId,
+                trabajador_social_id: trabajadorSocialId
+            });
         });
     </script>
 </x-app-layout>
