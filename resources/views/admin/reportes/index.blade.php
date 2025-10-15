@@ -56,14 +56,11 @@
                                     <option value="">Todos los estados</option>
                                     <option value="pendiente" {{ request('estado') == 'pendiente' ? 'selected' : '' }}>
                                         Pendiente</option>
-                                    <option value="firmado_prefecto"
-                                        {{ request('estado') == 'firmado_prefecto' ? 'selected' : '' }}>Firmado por
-                                        Prefecto</option>
-                                    <option value="firmado_trabajo_social"
-                                        {{ request('estado') == 'firmado_trabajo_social' ? 'selected' : '' }}>Firmado
-                                        por Trabajo Social</option>
-                                    <option value="completado"
-                                        {{ request('estado') == 'completado' ? 'selected' : '' }}>Completado</option>
+                                    <option value="no firmado"
+                                        {{ request('estado') == 'no firmado' ? 'selected' : '' }}>
+                                        No Firmado</option>
+                                    <option value="atendido" {{ request('estado') == 'atendido' ? 'selected' : '' }}>
+                                        Atendido</option>
                                 </select>
                             </div>
 
@@ -210,16 +207,16 @@
                                                 $estadoColors = [
                                                     'pendiente' =>
                                                         'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400',
-                                                    'firmado_prefecto' =>
+                                                    'no firmado' =>
                                                         'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400',
-                                                    'firmado_trabajo_social' =>
-                                                        'bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-400',
-                                                    'completado' =>
+                                                    'atendido' =>
                                                         'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400',
                                                 ];
                                             @endphp
                                             <span
-                                                class="px-2 py-1 rounded-full text-xs font-medium {{ $estadoColors[$reporte->estado] ?? 'bg-gray-100 text-gray-800' }}">
+                                                class="px-2 py-1 rounded-full text-xs font-medium cursor-pointer hover:opacity-80 transition-opacity {{ $estadoColors[$reporte->estado] ?? 'bg-gray-100 text-gray-800' }}"
+                                                onclick="cambiarEstado({{ $reporte->id }})"
+                                                title="Clic para cambiar estado">
                                                 {{ ucfirst(str_replace('_', ' ', $reporte->estado)) }}
                                             </span>
                                         </td>
@@ -308,3 +305,74 @@
         </div>
     </div>
 </x-app-layout>
+
+<script>
+    function cambiarEstado(reporteId) {
+        // Mostrar indicador de carga
+        const elemento = event.target;
+        const textoOriginal = elemento.textContent;
+        elemento.textContent = 'Cambiando...';
+        elemento.style.opacity = '0.5';
+
+        // Realizar petición AJAX
+        fetch(`/reportes/${reporteId}/cambiar-estado`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Actualizar el texto del estado
+                    elemento.textContent = data.nuevo_estado.charAt(0).toUpperCase() + data.nuevo_estado.slice(1);
+
+                    // Actualizar los colores según el nuevo estado
+                    const estadoColors = {
+                        'pendiente': 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400',
+                        'no firmado': 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400',
+                        'atendido': 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400'
+                    };
+
+                    // Remover clases de color anteriores
+                    elemento.className = elemento.className.replace(
+                        /bg-\w+-\d+\s+text-\w+-\d+\s+dark:bg-\w+-\d+\/30\s+dark:text-\w+-\d+/g, '');
+
+                    // Agregar nuevas clases de color
+                    elemento.className += ' ' + estadoColors[data.nuevo_estado];
+
+                    // Mostrar mensaje de éxito
+                    mostrarMensaje(data.mensaje, 'success');
+                } else {
+                    elemento.textContent = textoOriginal;
+                    mostrarMensaje('Error al cambiar el estado', 'error');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                elemento.textContent = textoOriginal;
+                mostrarMensaje('Error de conexión', 'error');
+            })
+            .finally(() => {
+                elemento.style.opacity = '1';
+            });
+    }
+
+    function mostrarMensaje(mensaje, tipo) {
+        // Crear elemento de notificación
+        const notificacion = document.createElement('div');
+        notificacion.className = `fixed top-4 right-4 px-4 py-2 rounded-md text-white z-50 ${
+        tipo === 'success' ? 'bg-green-500' : 'bg-red-500'
+    }`;
+        notificacion.textContent = mensaje;
+
+        // Agregar al DOM
+        document.body.appendChild(notificacion);
+
+        // Remover después de 3 segundos
+        setTimeout(() => {
+            notificacion.remove();
+        }, 3000);
+    }
+</script>

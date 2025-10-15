@@ -47,6 +47,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::resource('reportes', ReporteAlumnoController::class)->names('reportes');
     Route::patch('reportes/{reporte}/firmar-prefecto', [ReporteAlumnoController::class, 'firmarPrefecto'])->name('reportes.firmar-prefecto');
     Route::patch('reportes/{reporte}/firmar-trabajador-social', [ReporteAlumnoController::class, 'firmarTrabajadorSocial'])->name('reportes.firmar-trabajador-social');
+    Route::patch('reportes/{reporte}/cambiar-estado', [ReporteAlumnoController::class, 'cambiarEstado'])->name('reportes.cambiar-estado');
     Route::get('reportes/{reporte}/pdf', [ReporteAlumnoController::class, 'pdf'])->name('reportes.pdf');
     // Admin - Materias
     Route::get('materias', [App\Http\Controllers\CatalogosController::class, 'index'])->name('materias.index');

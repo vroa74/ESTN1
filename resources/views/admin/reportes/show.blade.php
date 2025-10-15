@@ -102,11 +102,8 @@
                             $estadoColors = [
                                 'pendiente' =>
                                     'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400',
-                                'firmado_prefecto' =>
-                                    'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400',
-                                'firmado_trabajo_social' =>
-                                    'bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-400',
-                                'completado' => 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400',
+                                'no firmado' => 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400',
+                                'atendido' => 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400',
                             ];
                         @endphp
                         <span

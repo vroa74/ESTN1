@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('materia', 100);
             $table->text('descripcion_reporte');
             $table->text('observaciones')->nullable();
-            $table->enum('estado', ['pendiente', 'aprobado', 'rechazado'])->default('pendiente');
+            $table->enum('estado', ['pendiente', 'no firmado', 'atendido'])->default('pendiente');
             $table->integer('version')->default(1);
             
             // Usuarios involucrados (TODOS OBLIGATORIOS - NOT NULL)
@@ -35,6 +35,10 @@ return new class extends Migration
             
             $table->unsignedBigInteger('trabajo_social_id'); // Trabajador social que firma
             $table->foreign('trabajo_social_id')->references('id')->on('users')->onDelete('cascade');
+            
+            // Campos de firma
+            $table->timestamp('firma_prefecto_at')->nullable();
+            $table->timestamp('firma_trabajo_social_at')->nullable();
             
             $table->timestamps();
             

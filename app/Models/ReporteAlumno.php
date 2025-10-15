@@ -57,14 +57,14 @@ class ReporteAlumno extends Model
         return $query->where('estado', 'pendiente');
     }
 
-    public function scopeFirmadosPorPrefecto($query)
+    public function scopeNoFirmados($query)
     {
-        return $query->where('estado', 'firmado_prefecto');
+        return $query->where('estado', 'no firmado');
     }
 
-    public function scopeCompletados($query)
+    public function scopeAtendidos($query)
     {
-        return $query->where('estado', 'completado');
+        return $query->where('estado', 'atendido');
     }
 
     // Métodos auxiliares
@@ -75,11 +75,11 @@ class ReporteAlumno extends Model
 
     public function puedeFirmarTrabajoSocial(): bool
     {
-        return $this->estado === 'firmado_prefecto';
+        return $this->estado === 'no firmado';
     }
 
-    public function estaCompletado(): bool
+    public function estaAtendido(): bool
     {
-        return $this->estado === 'completado';
+        return $this->estado === 'atendido';
     }
 }

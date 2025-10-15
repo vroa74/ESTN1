@@ -255,7 +255,7 @@ class ReporteAlumnoController extends Controller
         }
 
         $reporte->update([
-            'estado' => 'firmado_prefecto',
+            'estado' => 'no firmado',
             'firma_prefecto_at' => now(),
             'prefecto_id' => auth()->user()->id
         ]);
@@ -275,7 +275,7 @@ class ReporteAlumnoController extends Controller
         }
 
         $reporte->update([
-            'estado' => 'completado',
+            'estado' => 'atendido',
             'firma_trabajo_social_at' => now(),
             'trabajo_social_id' => auth()->user()->id
         ]);
@@ -285,19 +285,33 @@ class ReporteAlumnoController extends Controller
     }
 
     /**
-     * Generar PDF del reporte
+     * Cambiar estado cíclicamente del reporte
      */
-    public function pdf(ReporteAlumno $reporte)
+    public function cambiarEstado(ReporteAlumno $reporte)
     {
-        $reporte->load(['student', 'profesor', 'prefecto', 'trabajadorSocial']);
+        // Definir el ciclo de estados
+        $estados = ['pendiente', 'no firmado', 'atendido'];
         
-        // Generar el PDF usando dompdf
-        $pdf = Pdf::loadView('admin.reportes.pdf', compact('reporte'));
+        // Encontrar el índice del estado actual
+        $indiceActual = array_search($reporte->estado, $estados);
         
-        // Nombre del archivo PDF
-        $filename = 'reporte_' . $reporte->student->matricula . '_' . $reporte->id . '.pdf';
+        // Si no se encuentra el estado actual, usar pendiente como default
+        if ($indiceActual === false) {
+            $indiceActual = 0;
+        }
         
-        // Retornar el PDF para visualización en el navegador
-        return $pdf->stream($filename);
+        // Calcular el siguiente estado (cíclico)
+        $siguienteIndice = ($indiceActual + 1) % count($estados);
+        $nuevoEstado = $estados[$siguienteIndice];
+        
+        // Actualizar el reporte con el nuevo estado
+        $reporte->update(['estado' => $nuevoEstado]);
+        
+        // Retornar respuesta JSON para AJAX
+        return response()->json([
+            'success' => true,
+            'nuevo_estado' => $nuevoEstado,
+            'mensaje' => "Estado cambiado a: " . ucfirst($nuevoEstado)
+        ]);
     }
 }
