@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Oct 14, 2025 at 08:13 PM
+-- Generation Time: Oct 14, 2025 at 11:16 PM
 -- Server version: 8.0.30
 -- PHP Version: 8.3.26
 
@@ -485,11 +485,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (8, '2025_10_09_173218_modify_curp_column_length_in_users_table', 1),
 (9, '2025_10_11_181313_create_students_table', 1),
 (10, '2025_10_11_181326_create_bitacoras_table', 1),
-(11, '2025_10_12_171820_create_reportes_alumnos_table', 2),
 (12, '2025_10_12_183401_create_materias_table', 3),
-(13, '2025_10_12_212642_add_fulltext_indexes_to_reportes_alumnos_table', 4),
-(14, '2025_10_14_110638_add_periodo_to_reportes_alumnos_table', 5),
-(15, '2025_10_14_140440_make_trabajo_social_id_required_in_reportes_alumnos_table', 6);
+(16, '2025_10_14_141804_create_reportes_alumnos_table_corrected', 4);
 
 -- --------------------------------------------------------
 
@@ -533,16 +530,13 @@ CREATE TABLE `reportes_alumnos` (
   `student_id` bigint UNSIGNED NOT NULL,
   `fecha_reporte` date NOT NULL,
   `materia` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `periodo` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `profesor_id` bigint UNSIGNED NOT NULL,
-  `prefecto_id` bigint UNSIGNED DEFAULT NULL,
-  `trabajo_social_id` bigint UNSIGNED NOT NULL,
   `descripcion_reporte` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `estado` enum('pendiente','firmado_prefecto','firmado_trabajo_social','completado') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'pendiente',
-  `firma_prefecto_at` timestamp NULL DEFAULT NULL,
-  `firma_trabajo_social_at` timestamp NULL DEFAULT NULL,
   `observaciones` text COLLATE utf8mb4_unicode_ci,
+  `estado` enum('pendiente','aprobado','rechazado') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'pendiente',
   `version` int NOT NULL DEFAULT '1',
+  `profesor_id` bigint UNSIGNED NOT NULL,
+  `prefecto_id` bigint UNSIGNED NOT NULL,
+  `trabajo_social_id` bigint UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -551,13 +545,9 @@ CREATE TABLE `reportes_alumnos` (
 -- Dumping data for table `reportes_alumnos`
 --
 
-INSERT INTO `reportes_alumnos` (`id`, `student_id`, `fecha_reporte`, `materia`, `periodo`, `profesor_id`, `prefecto_id`, `trabajo_social_id`, `descripcion_reporte`, `estado`, `firma_prefecto_at`, `firma_trabajo_social_at`, `observaciones`, `version`, `created_at`, `updated_at`) VALUES
-(1, 18, '2025-10-14', 'Español', NULL, 1, NULL, 2, 'holas don las casa de las mas', 'pendiente', NULL, NULL, 'casa de la case de las dlsdljd', 1, '2025-10-14 18:34:02', '2025-10-14 20:05:59'),
-(2, 18, '2025-10-14', 'Formación Cívica y Ética', NULL, 1, 3, 2, 'casa casa', 'pendiente', NULL, NULL, 'casa casas', 1, '2025-10-14 19:32:01', '2025-10-14 20:05:59'),
-(3, 4, '2025-10-14', 'Tecnología', NULL, 1, 3, 2, 'casa casa', 'pendiente', NULL, NULL, 'no se que pas', 1, '2025-10-14 19:39:06', '2025-10-14 20:05:59'),
-(4, 19, '2025-10-14', 'Matemáticas', NULL, 5, 3, 2, 'casacasa', 'pendiente', NULL, NULL, 'asdasdaasd', 1, '2025-10-14 19:48:43', '2025-10-14 20:05:59'),
-(5, 26, '2025-10-14', 'Ciencias y Tecnología (Biología)', NULL, 1, 3, 2, 'casa', 'pendiente', NULL, NULL, 'dasda', 1, '2025-10-14 19:55:22', '2025-10-14 20:05:59'),
-(6, 2, '2025-10-14', 'Artes', NULL, 1, 3, 2, 'casa', 'pendiente', NULL, NULL, 'casa', 1, '2025-10-14 20:00:30', '2025-10-14 20:05:59');
+INSERT INTO `reportes_alumnos` (`id`, `student_id`, `fecha_reporte`, `materia`, `descripcion_reporte`, `observaciones`, `estado`, `version`, `profesor_id`, `prefecto_id`, `trabajo_social_id`, `created_at`, `updated_at`) VALUES
+(3, 2, '2025-10-14', 'Ciencias y Tecnología (Biología)', 'casa one', 'one', 'pendiente', 1, 1, 7, 2, '2025-10-14 20:46:22', '2025-10-14 23:05:42'),
+(4, 18, '2025-10-14', 'Artes', 'casa dos', 'casa', 'pendiente', 1, 5, 3, 2, '2025-10-14 20:50:04', '2025-10-14 20:50:04');
 
 -- --------------------------------------------------------
 
@@ -580,10 +570,13 @@ CREATE TABLE `sessions` (
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
 ('07e8v6vajVbGOpNMQgezH0ok4GhWj4LAdu8uNH4x', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT; Windows NT 10.0; es-MX) WindowsPowerShell/5.1.19041.6392', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiUXJVM09DWTgzb1paYjZheDNCZkVNYXpvQjU1Y2dqdndjTUxQaDNseSI7czozOiJ1cmwiO2E6MTp7czo4OiJpbnRlbmRlZCI7czozNjoiaHR0cDovL2xvY2FsaG9zdDo4MDAwL2RlYnVnL3JlcG9ydGVzIjt9czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mjc6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMC9sb2dpbiI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1760471465),
+('6rKO4Ec5qIEf32eiyZ7WT8tNhWhfy8jvCYTHkFOb', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT; Windows NT 10.0; es-MX) WindowsPowerShell/5.1.19041.6392', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoibE1GOHJSZTI0anpXeHJ3YTU1UFJaOVVXcTc5UnFPSGlrUURZMjgyUSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mzk6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMC9kZWJ1Zy90aXBvcy1kYXRvcyI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1760473149),
+('bsqr0JzJvAXEEp2HG4vWDOHmeysjb3ZXhFPwpIJH', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:143.0) Gecko/20100101 Firefox/143.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoia3RsTnpxRDVleUZ4WWRDMEN4dFFmamlCRWlFWkRuOUxTR3N6RzVaaSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MTk6Imh0dHA6Ly9lc3RuMS5hc2subWUiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1760481145),
 ('c4NpS8Zr3hvbnkBAZVKSctD4rd4daEefZOuqcFAZ', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT; Windows NT 10.0; es-MX) WindowsPowerShell/5.1.19041.6392', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiYnc5Y3ZGSlhKMzRuUjNRcmlqUGVFMFo0RHBxeHVsOG1EdWNkNmFadSI7czozOiJ1cmwiO2E6MTp7czo4OiJpbnRlbmRlZCI7czo0MzoiaHR0cDovL2xvY2FsaG9zdDo4MDAwL2RlYnVnL3JlcG9ydGVzLXB1YmxpYyI7fXM6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjI3OiJodHRwOi8vbG9jYWxob3N0OjgwMDAvbG9naW4iO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1760472666),
 ('cbMFQFwhtxvVoK9CseXZa9P5Olq2qPXp2KCyWsju', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:143.0) Gecko/20100101 Firefox/143.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiSmlvT2JSeTJZNDI0a240SW9ZMFZzMW1hV1FvTHBZdWlxbGVjbU5JYSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjY6Imh0dHBzOi8vZXN0bjEuYXNrLm1lL2xvZ2luIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1760467175),
-('fAH95btxtngDAXiWk2mCjCoWoR9wxhXD3nSErmTl', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:143.0) Gecko/20100101 Firefox/143.0', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoibDJ6djJHQWFCbFB3a3JIb0NzcWtHMzd0RWJ3VExRdENsZVVkbHN2VCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mjk6Imh0dHBzOi8vZXN0bjEuYXNrLm1lL3JlcG9ydGVzIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTt9', 1760472030),
+('fAH95btxtngDAXiWk2mCjCoWoR9wxhXD3nSErmTl', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:143.0) Gecko/20100101 Firefox/143.0', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoibDJ6djJHQWFCbFB3a3JIb0NzcWtHMzd0RWJ3VExRdENsZVVkbHN2VCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mjk6Imh0dHBzOi8vZXN0bjEuYXNrLm1lL21hdGVyaWFzIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTt9', 1760483473),
 ('gHgz9caIG8FtMwvvTfVFk0BSTsAtCoK8gYFi9IHI', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT; Windows NT 10.0; es-MX) WindowsPowerShell/5.1.19041.6392', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiSFZweng3OVdNY09kQVNRRzFHTVZBWXFmRXhWc3lOYjN4N3I0VU9VaCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mzk6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMC9kZWJ1Zy90aXBvcy1kYXRvcyI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1760472506),
+('KMIHX5CdDdTGCBVHFeq8VyFRWMGyuexZTeSrFsr0', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:143.0) Gecko/20100101 Firefox/143.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiM3lqODNuejl6WjlCYUpTc1ZqS3JOckxYYnhuUFdCUUJQUnhNWTlPWiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjU6Imh0dHA6Ly9lc3RuMS5hc2subWUvbG9naW4iO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1760481146),
 ('OZKBDD221a18ACFt3mxTlET2RgndBSIe5jRrJAgl', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:143.0) Gecko/20100101 Firefox/143.0', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiem9Ma3p6SGxPMnNsNTJwYzdWSU41QUtzSE5KNzdOY3VmdzhwYnBuMiI7czozOiJ1cmwiO2E6MTp7czo4OiJpbnRlbmRlZCI7czoyOToiaHR0cHM6Ly9lc3RuMS5hc2subWUvcmVwb3J0ZXMiO31zOjk6Il9wcmV2aW91cyI7YToxOntzOjM6InVybCI7czoyOToiaHR0cHM6Ly9lc3RuMS5hc2subWUvcmVwb3J0ZXMiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1760467174),
 ('stk0AsJIZNmBIeDjoLeI117hl2yrYfWv9LBxSV40', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT; Windows NT 10.0; es-MX) WindowsPowerShell/5.1.19041.6392', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiTVVqZVdpaXdrbktFdlVPc1Z4NTdHRFEyaVBwaXdVQUZ2UUwzQlN2WSI7czozOiJ1cmwiO2E6MTp7czo4OiJpbnRlbmRlZCI7czo0MzoiaHR0cDovL2xvY2FsaG9zdDo4MDAwL2RlYnVnL3JlcG9ydGVzLXB1YmxpYyI7fXM6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjI3OiJodHRwOi8vbG9jYWxob3N0OjgwMDAvbG9naW4iO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1760471560),
 ('TZ3TEP2E7tOauhNOCTaBcQl2B4fCRb4oRqGuOPlZ', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT; Windows NT 10.0; es-MX) WindowsPowerShell/5.1.19041.6392', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiNUZrVUtaanB1eVg1YmlpTDhhWEd0SlE3N082aFIyU1VxOVQzVzN1aCI7czozOiJ1cmwiO2E6MTp7czo4OiJpbnRlbmRlZCI7czo0MzoiaHR0cDovL2xvY2FsaG9zdDo4MDAwL2RlYnVnL3JlcG9ydGVzLXB1YmxpYyI7fXM6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjI3OiJodHRwOi8vbG9jYWxob3N0OjgwMDAvbG9naW4iO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1760471510);
@@ -824,7 +817,9 @@ INSERT INTO `users` (`id`, `name`, `rfc`, `curp`, `sexo`, `theme`, `nivel`, `pue
 (2, 'manuela del carme dzib chan', 'dicm750603', 'dicm750603', 'femenino', 'dark', 7, 'TRABAJO SOCIAL', 1, 'manuelad26@gmail.com', NULL, '$2y$12$NyU49mbkmHeGf8m7jztfceihGDF/yW170NxRuBqWsW1gYAzYkF/EK', NULL, NULL, NULL, NULL, NULL, NULL, '2025-10-12 23:36:16', '2025-10-12 23:36:16'),
 (3, 'este es un prefecto', 'casa123456', 'casa123456', 'masculino', 'dark', 7, 'PREFECTURA', 1, 'este@es.un', NULL, '$2y$12$Olu08tM8uV1G3IUqJGvSTewog3/Vy9Bmnhravllt0hfg0kQr74Byq', NULL, NULL, NULL, NULL, NULL, NULL, '2025-10-13 02:26:56', '2025-10-13 02:26:56'),
 (4, 'estes es un  psicologo', 'casacasa12345', 'casacasa12345', 'masculino', 'light', 7, 'PSICOLOGO', 1, 'psicologo@loco.tu', NULL, '$2y$12$HUOBxQ3KC/8yVwlIPeR2L.ySNjzDyPIeN9reEKErLKWmTy6ABL9Mq', NULL, NULL, NULL, NULL, NULL, NULL, '2025-10-13 02:28:07', '2025-10-13 02:28:07'),
-(5, 'PABLO INFO', 'PASD1234567', 'PASD1234567', 'masculino', 'light', 7, 'DOCENTE', 1, 'PABLO.INFO@GMAIL.COM', NULL, '$2y$12$oUvrHiBraRIRy15VqRsY.uKSWaDO/qgDLsb1KSSAyP0mRfcnKUOlS', NULL, NULL, NULL, NULL, NULL, NULL, '2025-10-14 18:04:31', '2025-10-14 18:04:31');
+(5, 'PABLO INFO', 'PASD1234567', 'PASD1234567', 'masculino', 'light', 7, 'DOCENTE', 1, 'PABLO.INFO@GMAIL.COM', NULL, '$2y$12$oUvrHiBraRIRy15VqRsY.uKSWaDO/qgDLsb1KSSAyP0mRfcnKUOlS', NULL, NULL, NULL, NULL, NULL, NULL, '2025-10-14 18:04:31', '2025-10-14 18:04:31'),
+(6, 'JULIO ESCAMILLA FUENTES', 'JULO1234560', 'JULO1234560', 'masculino', 'light', 7, 'TRABAJO SOCIAL', 1, 'JULIO@GMAIL.COM', NULL, '$2y$12$tgrZV1cpz8KtpjwfjDmEhufeDzPo1G7KiElu8jt0Dvo3tToLcMa62', NULL, NULL, NULL, NULL, NULL, NULL, '2025-10-14 22:33:47', '2025-10-14 22:33:47'),
+(7, 'GONZALO CHI CHAN', 'GOCHI123456', 'GOCHI123456', 'masculino', 'light', 7, 'PREFECTURA', 1, 'GOCHICHA@GMAIL.COM', NULL, '$2y$12$/0ix2s9rnfOyT6/7SeBKZOUYECLg2TvoxBwfCaSmOKD9zMvUzwk6i', NULL, NULL, NULL, NULL, NULL, NULL, '2025-10-14 22:40:15', '2025-10-14 22:40:15');
 
 --
 -- Indexes for dumped tables
@@ -884,14 +879,13 @@ ALTER TABLE `personal_access_tokens`
 --
 ALTER TABLE `reportes_alumnos`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `reportes_alumnos_prefecto_id_foreign` (`prefecto_id`),
-  ADD KEY `reportes_alumnos_trabajo_social_id_foreign` (`trabajo_social_id`),
   ADD KEY `reportes_alumnos_student_id_fecha_reporte_index` (`student_id`,`fecha_reporte`),
   ADD KEY `reportes_alumnos_profesor_id_fecha_reporte_index` (`profesor_id`,`fecha_reporte`),
-  ADD KEY `reportes_alumnos_estado_index` (`estado`);
-ALTER TABLE `reportes_alumnos` ADD FULLTEXT KEY `descripcion_reporte` (`descripcion_reporte`);
-ALTER TABLE `reportes_alumnos` ADD FULLTEXT KEY `observaciones` (`observaciones`);
-ALTER TABLE `reportes_alumnos` ADD FULLTEXT KEY `descripcion_reporte_2` (`descripcion_reporte`,`observaciones`);
+  ADD KEY `reportes_alumnos_prefecto_id_fecha_reporte_index` (`prefecto_id`,`fecha_reporte`),
+  ADD KEY `reportes_alumnos_trabajo_social_id_fecha_reporte_index` (`trabajo_social_id`,`fecha_reporte`),
+  ADD KEY `reportes_alumnos_estado_index` (`estado`),
+  ADD KEY `reportes_alumnos_fecha_reporte_index` (`fecha_reporte`);
+ALTER TABLE `reportes_alumnos` ADD FULLTEXT KEY `reportes_alumnos_descripcion_reporte_observaciones_fulltext` (`descripcion_reporte`,`observaciones`);
 
 --
 -- Indexes for table `sessions`
@@ -949,7 +943,7 @@ ALTER TABLE `materias`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -961,7 +955,7 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `reportes_alumnos`
 --
 ALTER TABLE `reportes_alumnos`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `students`
@@ -973,7 +967,7 @@ ALTER TABLE `students`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Constraints for dumped tables
@@ -990,9 +984,10 @@ ALTER TABLE `bitacoras`
 -- Constraints for table `reportes_alumnos`
 --
 ALTER TABLE `reportes_alumnos`
-  ADD CONSTRAINT `reportes_alumnos_prefecto_id_foreign` FOREIGN KEY (`prefecto_id`) REFERENCES `users` (`id`) ON DELETE SET NULL,
+  ADD CONSTRAINT `reportes_alumnos_prefecto_id_foreign` FOREIGN KEY (`prefecto_id`) REFERENCES `users` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `reportes_alumnos_profesor_id_foreign` FOREIGN KEY (`profesor_id`) REFERENCES `users` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `reportes_alumnos_student_id_foreign` FOREIGN KEY (`student_id`) REFERENCES `students` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `reportes_alumnos_student_id_foreign` FOREIGN KEY (`student_id`) REFERENCES `students` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `reportes_alumnos_trabajo_social_id_foreign` FOREIGN KEY (`trabajo_social_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

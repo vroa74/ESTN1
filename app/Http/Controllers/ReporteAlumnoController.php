@@ -7,6 +7,7 @@ use App\Models\ReporteAlumno;
 use App\Models\Student;
 use App\Models\User;
 use Illuminate\Support\Facades\Log;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class ReporteAlumnoController extends Controller
 {
@@ -290,8 +291,13 @@ class ReporteAlumnoController extends Controller
     {
         $reporte->load(['student', 'profesor', 'prefecto', 'trabajadorSocial']);
         
-        // Aquí implementarías la generación del PDF
-        // Por ahora retornamos una vista que simula el PDF
-        return view('admin.reportes.pdf', compact('reporte'));
+        // Generar el PDF usando dompdf
+        $pdf = Pdf::loadView('admin.reportes.pdf', compact('reporte'));
+        
+        // Nombre del archivo PDF
+        $filename = 'reporte_' . $reporte->student->matricula . '_' . $reporte->id . '.pdf';
+        
+        // Retornar el PDF para visualización en el navegador
+        return $pdf->stream($filename);
     }
 }
