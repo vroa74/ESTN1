@@ -12,7 +12,7 @@
 
         body {
             font-family: Arial, sans-serif;
-            font-size: 8px;
+            font-size: 12px;
             line-height: 1.2;
             margin: 0;
             padding: 0;
@@ -31,24 +31,54 @@
             border-bottom: 1px dashed #000;
         }
 
-        .header {
-            text-align: center;
+        .header-table {
+            width: 100%;
             margin-bottom: 8px;
+            border-collapse: collapse;
+        }
+
+        .header-table td {
+            vertical-align: middle;
+            text-align: center;
+            padding: 5px;
+        }
+
+        .header-logo-cell {
+            width: 20%;
+        }
+
+        .header-content-cell {
+            width: 60%;
+        }
+
+        .header-logos {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .header-logos img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
         }
 
         .school-name {
-            font-size: 10px;
+            font-size: 16px;
             font-weight: bold;
             margin-bottom: 2px;
         }
 
         .school-address {
-            font-size: 7px;
+            font-size: 15px;
             margin-bottom: 2px;
         }
 
         .report-title {
-            font-size: 11px;
+            font-size: 18px;
             font-weight: bold;
             text-decoration: underline;
             margin-bottom: 8px;
@@ -56,6 +86,14 @@
 
         .form-section {
             margin-bottom: 8px;
+        }
+
+        .form-section.text-right {
+            text-align: right;
+        }
+
+        .form-section.text-right .form-row {
+            justify-content: flex-end;
         }
 
         .form-row {
@@ -79,12 +117,33 @@
             font-size: 7px;
         }
 
+        .bold-underline {
+            font-weight: bold;
+            text-decoration: underline;
+            font-size: 12px;
+        }
+
         .description-box {
-            border: 1px solid #000;
-            min-height: 60px;
+            /* border: 1px solid #000; */
             padding: 5px;
             margin-top: 5px;
-            font-size: 7px;
+            font-size: 12px;
+            border-radius: 20px;
+        }
+
+        .observations-wrapper {
+            border: 2px solid #333;
+            border-radius: 25px;
+            padding: 15px;
+            margin: 10px 0;
+            background-color: #f9f9f9;
+        }
+
+        .observations-wrapper-no-border {
+            border-radius: 25px;
+            padding: 15px;
+            margin: 10px 0;
+            background-color: #f9f9f9;
         }
 
         .signatures {
@@ -124,12 +183,13 @@
             padding: 5px;
             border: 1px solid #ccc;
             margin-bottom: 8px;
+            border-radius: 20px;
         }
 
         .info-row {
             display: flex;
             margin-bottom: 2px;
-            font-size: 7px;
+            font-size: 12px;
         }
 
         .info-label {
@@ -139,7 +199,7 @@
 
         .footer-info {
             margin-top: 8px;
-            font-size: 5px;
+            font-size: 12px;
             color: #666;
             text-align: center;
         }
@@ -161,77 +221,80 @@
     <!-- Primera copia -->
     <div class="report-copy">
         <!-- Encabezado -->
-        <div class="header">
-            <div class="school-name">Escuela Secundaria Técnica N°1</div>
-            <div class="school-address">Av. Juan de la barrera No. 9 frente Unid. Hab. FOVI</div>
-            <div class="school-address">San Francisco de Campeche, Campeche</div>
-            <div class="report-title">REPORTE DEL ALUMNO</div>
-        </div>
+        <table class="header-table">
+            <tr>
+                <!-- Logo izquierdo -->
+                <td class="header-logo-cell">
+                    <div class="header-logos">
+                        <img src="{{ public_path('images/logo_seduc.png') }}" alt="Logo SEDUC">
+                    </div>
+                </td>
 
-        <!-- Información del formulario -->
-        <div class="form-section">
+                <!-- Contenido central -->
+                <td class="header-content-cell">
+                    <div class="school-name">Escuela Secundaria Técnica N°1</div>
+                    <div class="school-address">Av. Juan de la barrera No. 9 frente Unid. Hab. FOVI</div>
+                    <div class="school-address">San Francisco de Campeche, Campeche</div>
+                    <div class="report-title">REPORTE DEL ALUMNO</div>
+                </td>
+
+                <!-- Logo derecho -->
+                <td class="header-logo-cell">
+                    <div class="header-logos">
+                        <img src="{{ public_path('images/LOGO_TECNICAS_vectorized.png') }}" alt="Logo Técnicas">
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <hr>
+
+        <div class="form-section text-right">
             <div class="form-row">
                 <span class="form-label">FECHA:</span>
-                <span class="form-field">{{ $reporte->fecha_reporte->format('d') }}</span>
-                <span class="form-label" style="margin-left: 8px;">de</span>
-                <span class="form-field" style="margin-left: 5px;">{{ $reporte->fecha_reporte->format('F') }}</span>
-                <span class="form-label" style="margin-left: 8px;">de 20</span>
-                <span class="form-field" style="margin-left: 5px;">{{ $reporte->fecha_reporte->format('y') }}</span>
-            </div>
-
-            <div class="form-row">
-                <span class="form-label">C. Profr. (a):</span>
-                <span class="form-field">{{ $reporte->profesor->name }}</span>
-            </div>
-
-            <div class="form-row">
-                <span class="form-label">MATERIA:</span>
-                <span class="form-field">{{ $reporte->materia }}</span>
-            </div>
-
-            <div class="form-row">
-                <span class="form-label">Alumno (a):</span>
-                <span class="form-field">{{ $reporte->student->full_name }}</span>
-                <span class="form-label" style="margin-left: 8px;">Grado:</span>
-                <span class="form-field" style="margin-left: 5px;">{{ $reporte->student->grado }}°
-                    {{ $reporte->student->grupo }}</span>
+                <span class="bold-underline">{{ $reporte->fecha_reporte->format('d') }}</span>
+                <span class="form-label" style="margin-left: 14px;">de</span>
+                <span class="bold-underline">{{ $reporte->fecha_reporte->locale('es')->monthName }}</span>
+                <span class="form-label" style="margin-left: 14px;">de 20</span>
+                <span class="bold-underline">{{ $reporte->fecha_reporte->format('Y') }}</span>
             </div>
         </div>
+
+        <div class="observations-wrapper">
+            <div class="form-row">
+                <span class="form-label" style="margin-left: 14px;">C. Profr. (a):</span>
+                <span class="bold-underline">{{ $reporte->profesor->name }}</span>.
+                -materia,
+                <span class="bold-underline">{{ $reporte->materia }}</span>.
+                Manifiesta que el alumno(a),
+                <span class="bold-underline">{{ $reporte->student->full_name }}</span>. de
+                <span class="bold-underline">{{ $reporte->student->grado }}°</span>, Grupo
+                <span class="bold-underline">{{ $reporte->student->grupo }}</span>.
+            </div>
+        </div>
+
 
         <!-- Información adicional del estudiante -->
         <div class="student-info">
+            <br>
             <div class="info-row">
-                <span class="info-label">Matrícula:</span>
-                <span>{{ $reporte->student->matricula ?? 'N/A' }}</span>
+                <span class="info-label">DESCRIPCION DEL REPORTE:</span>
+                <span class="bold-underline">{{ $reporte->descripcion_reporte }}</span>
             </div>
-            <div class="info-row">
-                <span class="info-label">Sexo:</span>
-                <span>{{ $reporte->student->sexo == 'F' ? 'Femenino' : 'Masculino' }}</span>
-            </div>
-            <div class="info-row">
-                <span class="info-label">Email:</span>
-                <span>{{ $reporte->student->email ?? 'N/A' }}</span>
-            </div>
-        </div>
-
-        <!-- Descripción del reporte -->
-        <div class="form-section">
-            <div class="form-label" style="font-weight: bold; margin-bottom: 3px;">DESCRIPCIÓN DEL REPORTE:</div>
-            <div class="description-box">
-                {{ $reporte->descripcion_reporte }}
-            </div>
+            <br>
         </div>
 
         <!-- Observaciones si existen -->
         @if ($reporte->observaciones)
-            <div class="form-section">
-                <div class="form-label" style="font-weight: bold; margin-bottom: 3px;">OBSERVACIONES:</div>
-                <div class="description-box" style="min-height: 40px;">
-                    {{ $reporte->observaciones }}
+            <div class="observations-wrapper">
+                <div class="form-section">
+                    <div class="form-label" style="font-weight: bold; margin-bottom: 3px;">OBSERVACIONES:</div>
+                    <div class="description-box">
+                        {{ $reporte->observaciones }}
+                    </div>
                 </div>
             </div>
         @endif
-        <br> <br>
+        <br>
 
         <!-- Firmas -->
         <div class="signatures">
@@ -269,7 +332,7 @@
                         </div>
                         <div class="signature-label">Trabajo Social</div>
                         @if ($reporte->firma_trabajo_social_at)
-                            <div style="font-size: 5px; margin-top: 1px;">
+                            <div style="font-size: 5px;">
                                 {{ $reporte->firma_trabajo_social_at->format('d/m/Y H:i') }}</div>
                         @endif
                     </td>
@@ -288,77 +351,81 @@
     <!-- Segunda copia (duplicado) -->
     <div class="report-copy">
         <!-- Encabezado -->
-        <div class="header">
-            <div class="school-name">Escuela Secundaria Técnica N°1</div>
-            <div class="school-address">Av. Juan de la barrera No. 9 frente Unid. Hab. FOVI</div>
-            <div class="school-address">San Francisco de Campeche, Campeche</div>
-            <div class="report-title">REPORTE DEL ALUMNO</div>
-        </div>
+        <table class="header-table">
+            <tr>
+                <!-- Logo izquierdo -->
+                <td class="header-logo-cell">
+                    <div class="header-logos">
+                        <img src="{{ public_path('images/logo_seduc.png') }}" alt="Logo SEDUC">
+                    </div>
+                </td>
 
-        <!-- Información del formulario -->
-        <div class="form-section">
+                <!-- Contenido central -->
+                <td class="header-content-cell">
+                    <div class="school-name">Escuela Secundaria Técnica N°1</div>
+                    <div class="school-address">Av. Juan de la barrera No. 9 frente Unid. Hab. FOVI</div>
+                    <div class="school-address">San Francisco de Campeche, Campeche</div>
+                    <div class="report-title">REPORTE DEL ALUMNO</div>
+                </td>
+
+                <!-- Logo derecho -->
+                <td class="header-logo-cell">
+                    <div class="header-logos">
+                        <img src="{{ public_path('images/LOGO_TECNICAS_vectorized.png') }}" alt="Logo Técnicas">
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <hr>
+
+        <div class="form-section text-right">
             <div class="form-row">
                 <span class="form-label">FECHA:</span>
-                <span class="form-field">{{ $reporte->fecha_reporte->format('d') }}</span>
-                <span class="form-label" style="margin-left: 8px;">de</span>
-                <span class="form-field" style="margin-left: 5px;">{{ $reporte->fecha_reporte->format('F') }}</span>
-                <span class="form-label" style="margin-left: 8px;">de 20</span>
-                <span class="form-field" style="margin-left: 5px;">{{ $reporte->fecha_reporte->format('y') }}</span>
-            </div>
-
-            <div class="form-row">
-                <span class="form-label">C. Profr. (a):</span>
-                <span class="form-field">{{ $reporte->profesor->name }}</span>
-            </div>
-
-            <div class="form-row">
-                <span class="form-label">MATERIA:</span>
-                <span class="form-field">{{ $reporte->materia }}</span>
-            </div>
-
-            <div class="form-row">
-                <span class="form-label">Alumno (a):</span>
-                <span class="form-field">{{ $reporte->student->full_name }}</span>
-                <span class="form-label" style="margin-left: 8px;">Grado:</span>
-                <span class="form-field" style="margin-left: 5px;">{{ $reporte->student->grado }}°
-                    {{ $reporte->student->grupo }}</span>
+                <span class="bold-underline">{{ $reporte->fecha_reporte->format('d') }}</span>
+                <span class="form-label" style="margin-left: 14px;">de</span>
+                <span class="bold-underline">{{ $reporte->fecha_reporte->locale('es')->monthName }}</span>
+                <span class="form-label" style="margin-left: 14px;">de 20</span>
+                <span class="bold-underline">{{ $reporte->fecha_reporte->format('Y') }}</span>
             </div>
         </div>
+
+        <div class="observations-wrapper">
+            <div class="form-row">
+                <span class="form-label" style="margin-left: 14px;">C. Profr. (a):</span>
+                <span class="bold-underline">{{ $reporte->profesor->name }}</span>.
+                -materia,
+                <span class="bold-underline">{{ $reporte->materia }}</span>.
+                Manifiesta que el alumno(a),
+                <span class="bold-underline">{{ $reporte->student->full_name }}</span>. de
+                <span class="bold-underline">{{ $reporte->student->grado }}°</span>, Grupo
+                <span class="bold-underline">{{ $reporte->student->grupo }}</span>.
+            </div>
+        </div>
+
 
         <!-- Información adicional del estudiante -->
         <div class="student-info">
+            <br>
             <div class="info-row">
-                <span class="info-label">Matrícula:</span>
-                <span>{{ $reporte->student->matricula ?? 'N/A' }}</span>
+                <span class="info-label">DESCRIPCION DEL REPORTE:</span>
+                <span class="bold-underline">{{ $reporte->descripcion_reporte }}</span>
             </div>
-            <div class="info-row">
-                <span class="info-label">Sexo:</span>
-                <span>{{ $reporte->student->sexo == 'F' ? 'Femenino' : 'Masculino' }}</span>
-            </div>
-            <div class="info-row">
-                <span class="info-label">Email:</span>
-                <span>{{ $reporte->student->email ?? 'N/A' }}</span>
-            </div>
-        </div>
-
-        <!-- Descripción del reporte -->
-        <div class="form-section">
-            <div class="form-label" style="font-weight: bold; margin-bottom: 3px;">DESCRIPCIÓN DEL REPORTE:</div>
-            <div class="description-box">
-                {{ $reporte->descripcion_reporte }}
-            </div>
+            <br>
         </div>
 
         <!-- Observaciones si existen -->
         @if ($reporte->observaciones)
-            <div class="form-section">
-                <div class="form-label" style="font-weight: bold; margin-bottom: 3px;">OBSERVACIONES:</div>
-                <div class="description-box" style="min-height: 40px;">
-                    {{ $reporte->observaciones }}
+            <div class="observations-wrapper">
+                <div class="form-section">
+                    <div class="form-label" style="font-weight: bold; margin-bottom: 3px;">OBSERVACIONES:</div>
+                    <div class="description-box">
+                        {{ $reporte->observaciones }}
+                    </div>
                 </div>
             </div>
         @endif
-        <br> <br>
+        <br>
+
         <!-- Firmas -->
         <div class="signatures">
             <table class="signatures-table">
@@ -395,7 +462,7 @@
                         </div>
                         <div class="signature-label">Trabajo Social</div>
                         @if ($reporte->firma_trabajo_social_at)
-                            <div style="font-size: 5px; margin-top: 1px;">
+                            <div style="font-size: 5px;">
                                 {{ $reporte->firma_trabajo_social_at->format('d/m/Y H:i') }}</div>
                         @endif
                     </td>
@@ -410,6 +477,7 @@
                 {{ now()->format('d/m/Y H:i') }}</div>
         </div>
     </div>
+
 </body>
 
 </html>
